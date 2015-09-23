@@ -9,8 +9,8 @@ import org.junit.Test;
 public class BlackjackTest {
 
 
-    //Tests the Deck constructor
+    //Tests the evaluatePoints method
     @Test
-    
+    assertEquals("Supposed to return card total", ,)
 
 }
