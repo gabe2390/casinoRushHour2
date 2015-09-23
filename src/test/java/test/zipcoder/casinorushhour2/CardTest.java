@@ -1,8 +1,6 @@
 package test.zipcoder.casinorushhour2;
 
 import io.zipcoder.casinorushhour2.Card;
-import io.zipcoder.casinorushhour2.CardFactory;
-import io.zipcoder.casinorushhour2.Suit;
 import org.junit.Before;
 import org.junit.Test;
 

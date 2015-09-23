@@ -35,7 +35,7 @@ public class Card {
         return SUIT.name();
     }
 
-    /**
+    /***
      * @return String - returns the name of the card, "Ace' through "King"
      */
     public String getName() {
