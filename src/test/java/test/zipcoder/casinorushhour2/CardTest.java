@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Gabriel Humphrey on 9/23/15.
- * This test suite test the Card class and all o its methods
+ * This test suite tests the Card class and all of its public methods
  */
 public class CardTest {
     Card card;
