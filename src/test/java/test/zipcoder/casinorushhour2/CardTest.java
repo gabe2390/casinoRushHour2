@@ -8,7 +8,7 @@ import static io.zipcoder.casinorushhour2.Suit.DIAMONDS;
 import static io.zipcoder.casinorushhour2.Suit.HEARTS;
 import static org.junit.Assert.assertEquals;
 
-/**
+/***
  * Created by Gabriel Humphrey on 9/23/15.
  * This test suite tests the Card class and all of its public methods
  */

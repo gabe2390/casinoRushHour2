@@ -2,7 +2,7 @@ package io.zipcoder.casinorushhour2;
 
 import java.util.ArrayList;
 
-/**
+/***
  * Created by Gabriel Humphrey on 9/23/15.
  * This Class is the template for a card that will be used to build a Deck.
  */
