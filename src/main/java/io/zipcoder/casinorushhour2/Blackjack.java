@@ -1,11 +1,12 @@
 package io.zipcoder.casinorushhour2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by rsparks on 9/22/15.
  */
-public class Blackjack implements CardGame{
+public class Blackjack implements CardGame {
 
 
     Player player;
@@ -13,9 +14,12 @@ public class Blackjack implements CardGame{
     Dealer DEALER = new Dealer();
     int points;
 
+    List<Card> hand = new ArrayList<Card>(2);
+    public  void a(){
 
-    public BlackJack(Deck d){
-        player= d.getPlayer();
+    }
+    public Blackjack(Deck d) {
+        player = d.getPlayer();
     }
 
 
@@ -31,13 +35,10 @@ public class Blackjack implements CardGame{
 
     }
 
-    /**
-     * adds up the points of your current hand
-     * @return int
-     */
-    public int evaluatePoints(List<hand>) {
+
+    public int evaluatePoints(ArrayList hand) {
         int points = 0;
-        for(int i = 0; i<hand.size(); i++){
+        for (int i = 0; i < hand.size(); i++) {
             points += hand.get(i);
         }
         return points;
@@ -45,23 +46,22 @@ public class Blackjack implements CardGame{
     }
 
     public void changeGameState() {
-        if(state == GameState.NotStarted){
+        if (state == GameState.NotRunning) {
             state = GameState.Running;
-        }
-        else if(state == GameState.Running){
-            state = GameState.finished;
-        }
-        else{
-            state = GameState.NotStarted;
+        } else {
+            state = GameState.NotRunning;
         }
 
     }
-    public void addToHand(Card){
+
+    public void addToHand(Card) {
+
 
     }
-    public Card askForHit(){
 
-        DEALER
+    public Card askForHit() {
+
+
     }
 
 }
