@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="336b7bc1-706e-4fcd-adfa-75b813c46cd7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/CardFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/test/zipcoder/casinorushhour2/CardFactoryTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/test/zipcoder/casinorushhour2/CardTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pom.xml" />
-    </list>
+    <list default="true" id="336b7bc1-706e-4fcd-adfa-75b813c46cd7" name="Default" comment="" />
     <ignored path="casinorushhour2.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -660,12 +655,12 @@
       <created>1442946447345</created>
       <option name="number" value="Default" />
       <updated>1442946447345</updated>
-      <workItem from="1442946452294" duration="28698000" />
+      <workItem from="1442946452294" duration="28922000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28698000" />
+    <option name="totallyTimeSpent" value="28922000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="704" extended-state="6" />
