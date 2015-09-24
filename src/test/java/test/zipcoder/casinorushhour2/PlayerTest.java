@@ -1,5 +1,6 @@
 package test.zipcoder.casinorushhour2;
 
+import io.zipcoder.casinorushhour2.Player;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
