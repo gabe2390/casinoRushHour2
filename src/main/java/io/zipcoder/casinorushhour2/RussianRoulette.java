@@ -3,12 +3,14 @@ package io.zipcoder.casinorushhour2;
 import java.util.Scanner;
 
 /**
- * Created by ghumphrey on 9/23/15.
+ * Created by Gabriel Humphrey on 9/23/15.
+ * This is the class for a game of RussianRoulette. Almost all of the functionality is contained in the playGame()
+ * that contains the game loop and calls other method to determine other actions.
  */
 public class RussianRoulette {
     Gun gun;
     Player player;
-    GameState state = GameState.ended;
+    GameState state = GameState.RUNNING;
 
     public RussianRoulette(Gun gun) {
         this.gun = gun;
@@ -16,54 +18,56 @@ public class RussianRoulette {
     }
 
     public void playGame() {
-        state = GameState.running;
-        Scanner key= new Scanner(System.in);
+        state = GameState.RUNNING;
+        Scanner key = new Scanner(System.in);
 
-        while (state == GameState.running) {
+        System.out.println("Look here ya broke bastard, you owe " + (-player.getBank()) + ". So here take this gun, and shoot at yourself!");
+
+        while (state == GameState.RUNNING) {
             gun.spinChamber();
 
-            if(checkForWinner()){
-                System.out.println("How unlucky are we? You just killed yourself. Better luck next life!");
-                state= GameState.ended;
+            long currentTime = System.nanoTime();
+
+            while ((System.nanoTime() - currentTime) <= 2000000000) {
+
             }
-            else{
+
+            if (checkForWinner()) {
+                System.out.println("BANG!!!!!!!");
+                System.out.println("How unlucky are we? You just killed yourself. Better luck next life!");
+                state = GameState.NOTRUNNING;
+            } else {
                 player.addToBank(1000);
 
-                if(player.getBank() < 0){
-                    System.out.println("You still owe sucka! Until you pay what you owe, shoot it again!");
-                }
-                else{
-                    System.out.println("You're free to go. However, if you want to earn a quick $1000, you can play again");
+                if (player.getBank() < 0) {
+                    System.out.println("Click!\nOk, you didn't die but, you still owe sucka! Until you pay what you owe, shoot it again!\n");
+                    System.out.println("You still owe " + (-player.getBank()) + "\n");
+                } else {
+                    System.out.println("Click!\nLucky bastard! You're free to go. You've got " + player.getBank() + "\n\nHowever, if you want to earn a quick $1000, you can play again");
                     System.out.println("Do you want to play again? Enter 'Y' to play again or any other key to exit.");
 
-                    if(key.nextLine().equalsIgnoreCase("Y")){
+                    if (key.nextLine().equalsIgnoreCase("Y")) {
                         System.out.println("Dumb-ass! Here we go again!");
-                    }
-                    else{
+                    } else {
                         System.out.println("Thanks for playing, don't lose an eye on your way out!");
-                        state= GameState.ended;
+                        state = GameState.NOTRUNNING;
                     }
                 }
             }
         }
-        exitGame();
     }
 
     private boolean checkForWinner() {
         return gun.shoot();
     }
 
-    private void exitGame() {
-
-    }
-
-    public static void main(String[] args){
-        RussianRoulette r= new RussianRoulette(new Gun(new Player()));
+    public static void main(String[] args) {
+        RussianRoulette r = new RussianRoulette(new Gun(new Player()));
 
         r.playGame();
     }
 }
 
 enum GameState {
-    running, ended
+    RUNNING, NOTRUNNING
 }
