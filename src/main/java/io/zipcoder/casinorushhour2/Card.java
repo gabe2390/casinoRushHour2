@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Card {
     private String name;
     private Suit SUIT;
+    private int value;
 
     /**
      * Constructor
@@ -46,6 +47,14 @@ public class Card {
      */
     public String getName() {
         return name;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     /**

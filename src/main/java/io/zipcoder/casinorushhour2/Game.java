@@ -8,11 +8,6 @@ package io.zipcoder.casinorushhour2;
 public interface Game {
 
     /**
-     * Sets the default GameState to NOTSTARTED
-     */
-    GameState state = GameState.NOTSTARTED;
-
-    /**
      * Initiates the game loop for a particular game
      */
     void playGame();
