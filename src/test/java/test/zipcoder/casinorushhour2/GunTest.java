@@ -45,6 +45,7 @@ public class GunTest {
     @Test
     public void givenGunIsInstantiatedThenShoot() {
         gun = new Gun(new Player());
+        assertEquals("");
     }
 
     @Test
