@@ -1,7 +1,10 @@
 package io.zipcoder.casinorushhour2;
 
-/**
+import java.util.ArrayList;
+
+/***
  * Created by Gabriel Humphrey on 9/23/15.
+ * This Class is the template for a card that will be used to build a Deck.
  */
 public class Card {
     private String name;
@@ -10,10 +13,12 @@ public class Card {
     /**
      * Constructor
      */
-    public Card() {}
+    public Card() {
+    }
 
     /**
      * Sets the suit field
+     *
      * @param suit received from the CardFactory when it creates the card
      */
     public void setSuit(Suit suit) {
@@ -22,6 +27,7 @@ public class Card {
 
     /**
      * Sets the name of the card
+     *
      * @param name - received from the CardFactory when it creates the card
      */
     public void setName(String name) {
@@ -35,7 +41,7 @@ public class Card {
         return SUIT.name();
     }
 
-    /**
+    /***
      * @return String - returns the name of the card, "Ace' through "King"
      */
     public String getName() {
