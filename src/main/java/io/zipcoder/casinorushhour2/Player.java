@@ -1,7 +1,6 @@
 package io.zipcoder.casinorushhour2;
 
 /**
-<<<<<<< HEAD
  * Created by rsparks on 9/23/15.
  * Player constructor with functions to getName, getBank, place a bet, and add winnings to the Player's bank
  */
