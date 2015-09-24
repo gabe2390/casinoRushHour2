@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f05d7c1b-f1c1-4a6d-a59b-92f2a10d80fb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/CardGame.java" afterPath="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/CardGame.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Dealer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="casinorushhour2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,8 +51,28 @@
       <file leaf-file-name="CardGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/CardGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4400978">
-              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.55012226">
+              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dealer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Dealer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -62,9 +83,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -82,15 +103,15 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Person.java" />
         <option value="$PROJECT_DIR$/src/test/java/test/io/zipcoder/casinorushhour2/PersonTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/test/io/zipcoder/casinorushhour2/PlayerTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Player.java" />
         <option value="$PROJECT_DIR$/src/test/java/test/io/zipcoder/casinorushhour2/BlackjackTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Card.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Blackjack.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/CardGame.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Player.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test/io/zipcoder/casinorushhour2/PlayerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/GameState.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Game.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/CardGame.java" />
       </list>
     </option>
   </component>
@@ -528,12 +549,12 @@
       <option name="number" value="Default" />
       <updated>1442946146714</updated>
       <workItem from="1442946151469" duration="20060000" />
-      <workItem from="1443037028477" duration="3829000" />
+      <workItem from="1443037028477" duration="5272000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23889000" />
+    <option name="totallyTimeSpent" value="25332000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="392" y="188" width="1280" height="720" extended-state="0" />
@@ -601,10 +622,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Dealer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/zipcoder/casinorushhour2/CardGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4400978">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.55012226">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding />
         </state>
       </provider>
