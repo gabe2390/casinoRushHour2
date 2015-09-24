@@ -2,6 +2,7 @@ package io.zipcoder.casinorushhour2;
 
 /**
  * Created by rsparks on 9/23/15.
+ * Player constructor with functions to getName, getBank, place a bet, and add winnings to the Player's bank
  */
 public class Player {
 
@@ -10,7 +11,7 @@ public class Player {
 
 
     /**
-     * Player constructor
+     * Player constructor that takes in a name and initialized bank to 3000
      * @param name
      */
     public Player(String name){
@@ -19,7 +20,7 @@ public class Player {
     }
 
     /**
-     * Name getter
+     * Gets name of player
      * @return name
      */
     public String getName(){
@@ -27,8 +28,8 @@ public class Player {
     }
 
     /**
-     * Bet function
-     * @param b
+     * Bet function, subtracts bet from bank and returns bet amount
+     * @param b -- bet amount
      * @return bet amount
      */
     public int bet(int b){

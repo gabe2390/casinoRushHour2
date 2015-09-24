@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by rsparks on 9/23/15.
+ * Tests methods in Player Class
  */
 public class PlayerTest {
 
