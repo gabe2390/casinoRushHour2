@@ -621,12 +621,12 @@
       <workItem from="1443046058068" duration="66000" />
       <workItem from="1443046125731" duration="12442000" />
       <workItem from="1443101673707" duration="2844000" />
-      <workItem from="1443105023974" duration="944000" />
+      <workItem from="1443105023974" duration="1000000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59137000" />
+    <option name="totallyTimeSpent" value="59193000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="704" extended-state="0" />
