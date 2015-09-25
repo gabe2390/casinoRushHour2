@@ -14,13 +14,14 @@ public class RussianRoulette {
 
     public RussianRoulette(Gun gun) {
         this.gun = gun;
-        this.player = gun.getPlayer();
+        this.player = this.gun.getPlayer();
+        gun.init();
     }
 
     public void playGame() {
         state = GameState.RUNNING;
         Scanner key = new Scanner(System.in);
-
+        System.out.println(player == null);
         System.out.println("Look here ya broke bastard, you owe " + (-player.getBank()) + ". So here take this gun, and shoot at yourself!");
 
         while (state == GameState.RUNNING) {
@@ -62,7 +63,11 @@ public class RussianRoulette {
     }
 
     public static void main(String[] args) {
-        RussianRoulette r = new RussianRoulette(new Gun(new Player("Gabe")));
+        Player p= new Player("Gabe");
+        System.out.println(p == null);
+        System.out.println(p.getBank());
+
+        RussianRoulette r = new RussianRoulette(new Gun(p));
 
         r.playGame();
     }

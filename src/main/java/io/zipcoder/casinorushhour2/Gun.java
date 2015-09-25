@@ -66,6 +66,6 @@ public class Gun {
      * @return Player
      */
     public Player getPlayer() {
-        return null;
+        return player;
     }
 }
