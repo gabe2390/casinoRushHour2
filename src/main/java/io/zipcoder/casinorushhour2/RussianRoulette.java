@@ -52,7 +52,7 @@ public class RussianRoulette implements Game {
                     System.out.println("You still owe " + (-player.getBank()) + "\n");
                 } else {
                     System.out.println("Click!\nLucky bastard! You're free to go. You've got " + player.getBank() + "\n\n" +
-                            "However, if you want to earn a quick " + (1000 * count) + ", you can play again");
+                            "However, if you want to earn a quick " + (1000 * (1+count)) + ", you can play again");
                     System.out.println("Do you want to play again? Enter 'Y' to play again or any other key to exit.");
 
                     //If player chooses to play again, re-enter the loop, else change GameState, thus ending the game loop, and the program
@@ -86,6 +86,7 @@ public class RussianRoulette implements Game {
 
     public static void main(String[] args) {
         Player p = new Player("Gabe");
+        p.addToBank(-5000);
         System.out.println(p == null);
         System.out.println(p.getBank());
 
