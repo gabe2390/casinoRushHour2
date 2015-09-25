@@ -68,7 +68,7 @@ public class Poker implements CardGame {
         DEALER.shuffleDeck(pokerDeck);
 
         DEALER.shuffleDeck(pokerDeck);
-        playerHand.addAll(DEALER.dealCards(5, pokerDeck));
+
 
     }
 
@@ -80,11 +80,11 @@ public class Poker implements CardGame {
 
     public void playGame() {
         currentState = RUNNING;
-
+        Scanner key= new Scanner(System.in);
         while (currentState == GameState.RUNNING)
 
         {
-
+            playerHand.addAll(DEALER.dealCards(5, pokerDeck));
             System.out.println("?????????????????????????????????????? . ######################################\n" +
                     "?????????????????????????????????????  %  #####################################\n" +
                     "????????????????????????????????????  %*:  ####################################\n" +
@@ -114,7 +114,15 @@ public class Poker implements CardGame {
 
             promptPlayerToBet();
             checkForWinner();
-            exitGame();
+            System.out.println("Do you want to play again?");
+
+            if(!key.nextLine().equals("Y")) {
+                exitGame();
+            }
+
+            pokerDeck.getCards().addAll(playerHand);
+            playerHand.clear();
+
         }
 
 
@@ -125,15 +133,26 @@ public class Poker implements CardGame {
      *
      */
     public void promptPlayerToBet() {
+        int x=0;
+
         System.out.println("Here is your hand..." + "\n");
         for (int i = 0; i < playerHand.size(); i++) {
             System.out.print("A " + playerHand.get(i).getName() + " of " + playerHand.get(i).getSuit() + "\n");
         }
+        try{
         System.out.println("\n" + "Enter the amount you wish to wager.");
         Scanner scanner = new Scanner(System.in);
-        int x = scanner.nextInt();
-        pokerPlayer.bet(x);
-        pot = x;
+        x = scanner.nextInt();
+            pokerPlayer.bet(x);
+            pot = x;
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Whats that? 1000? Yeah, that sounds about right." + "\n");
+            x = 1000;
+            pokerPlayer.bet(x);
+            pot = x;
+        }
+
     }
 
 
@@ -158,6 +177,8 @@ public class Poker implements CardGame {
 
         System.out.println("\n" + "Ending Poker");
         currentState = NOTRUNNING;
+
+
 
     }
 
@@ -289,16 +310,17 @@ public class Poker implements CardGame {
 
     public int returnDealerScore() {
         Random ran = new Random();
-        int x = (ran.nextInt(1) + 1 ) * 100 + (ran.nextInt(3)  ) * 100;
+        int x = (ran.nextInt(1) + 1) * 100 + (ran.nextInt(3) - 1) * 100;
         if (x == 800) {
             System.out.println("Tough luck chump, I got a Royal Flush!");
-        } else if (x <= 700 && x >= 500) {
+        } else if (x <= 700 && x >= 400) {
             System.out.println("Don't take it personal when I win this round, not everyone is as lucky as me.");
-        } else if (x <= 400 && x > 300) {
+        } else if (x <= 300 && x >= 200) {
             System.out.println("I've got a knack for getting just what I need when I need it.");
-        } else if (x <= 200) {
+        } else if (x <= 100) {
             System.out.println("The world needs its losers. I just never thought I'd be one.");
         }
+
 
         return x;
     }
@@ -309,11 +331,11 @@ public class Poker implements CardGame {
 
     public void checkForWinner() {
 
-        if (returnPlayerScore((ArrayList<Card>) playerHand) > returnDealerScore()) {
-            System.out.println("\n" + "Well now, look at that. You won!");
+        if (returnPlayerScore((ArrayList<Card>) playerHand) >= returnDealerScore()) {
+            System.out.println("\n" + "Well now, look at that. You won!" + "\n");
             pokerPlayer.addToBank(pot * 2);
         } else {
-            System.out.println("\n" + "Sorry kiddo, you lost! Looks like you're all outta luck.");
+            System.out.println("\n" + "Sorry kiddo, you lost! Looks like you're all outta luck." + "\n");
         }
 
 
