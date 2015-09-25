@@ -10,7 +10,7 @@ public interface Game {
     /**
      * Sets the default GameState to NOTSTARTED
      */
-    GameState state = GameState.NOTSTARTED;
+    GameState state = GameState.NOTRUNNING;
 
     /**
      * Initiates the game loop for a particular game

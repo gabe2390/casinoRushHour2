@@ -1,5 +1,6 @@
 package test.zipcoder.casinorushhour2;
 
+import io.zipcoder.casinorushhour2.Player;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PlayerTest {
 
-    Player player1 = new Player ("Rick");
+    Player player1 = new Player("Rick");
 
 
     /**

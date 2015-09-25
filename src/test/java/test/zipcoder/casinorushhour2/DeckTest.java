@@ -20,9 +20,9 @@ public class DeckTest {
     /**
      * Initializes deck object
      */
-    @Before
+
     public void beforeTestsInstantiateDeck() {
-        deck = new Deck(new Player());
+        deck = new Deck(new Player("dude"));
         deck.init();
     }
 
