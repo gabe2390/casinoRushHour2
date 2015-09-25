@@ -152,7 +152,11 @@ public class BlackJack implements CardGame {
     }
 
     public int alternateAcePoints(int i) {
-        return 1;
+        if (i < 11) {
+            return 1 + 10;
+        } else {
+            return i;
+        }
     }
 
     public boolean giveCardsBack(List<Card> hand) {
