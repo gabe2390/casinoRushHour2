@@ -299,7 +299,7 @@ public class Poker implements CardGame {
         } else if (x <= 200) {
             System.out.println("The world needs its losers. I just never thought I'd be one.");
         }
-        System.out.println(x);
+
         return x;
     }
 
