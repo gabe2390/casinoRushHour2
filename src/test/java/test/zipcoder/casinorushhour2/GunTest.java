@@ -45,6 +45,8 @@ public class GunTest {
         boolean allSame = true;
 
         gun.spinChamber();
+        gun.spinChamber();
+        gun.spinChamber();
 
         for (int i = 0; i < gun.getBulletChamber().size(); i++) {
             if (gun.getBulletChamber().get(i) != temp.getBulletChamber().get(i)) {
