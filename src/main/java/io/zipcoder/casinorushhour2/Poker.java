@@ -4,6 +4,8 @@ import com.sun.tools.internal.ws.wsdl.document.Kinds;
 
 import java.util.*;
 
+import static io.zipcoder.casinorushhour2.GameState.*;
+
 /**
  * Created by emaron on 9/24/15.
  */
@@ -13,7 +15,7 @@ public class Poker implements Game {
      * Enum of the kinds of possible Poker Hands
      */
     public enum Kinds {
-        PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, ROYALFLUSH, NOFLUSH
+        PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
     }
 
     /**
@@ -26,20 +28,19 @@ public class Poker implements Game {
 
     private List<Card> cards;
 
-    public static GameState state = GameState.NOTRUNNING;
+    public static GameState state = NOTRUNNING;
 
     //Hand Rankings
 
-    int royalFlush = 800;
-    int fourOfAKind = 700;
-    int fullHouse = 600;
-    int flush = 500;
-    int straight = 400;
-    int threeOfAKind = 300;
-    int twoPair = 200;
-    int onePair = 100;
-    //int noRankedHand = 0;
-
+    static int royalFlush = 800;
+    static int fourOfAKind = 700;
+    static int fullHouse = 600;
+    static int flush = 500;
+    static int straight = 400;
+    static int threeOfAKind = 300;
+    static int twoPair = 200;
+    static int onePair = 100;
+    static int noRankedHand = 0;
 
 
     /**
@@ -57,7 +58,7 @@ public class Poker implements Game {
      */
 
     public void playGame() {
-        this.state = GameState.RUNNING;
+        this.state = RUNNING;
     }
 
     /**
@@ -65,10 +66,10 @@ public class Poker implements Game {
      */
 
     public void changeGameState() {
-        if (state == GameState.NOTRUNNING) {
-            this.state = GameState.RUNNING;
+        if (state == NOTRUNNING) {
+            this.state = RUNNING;
         } else {
-            this.state = GameState.NOTRUNNING;
+            this.state = NOTRUNNING;
         }
     }
 
@@ -78,10 +79,9 @@ public class Poker implements Game {
      * @return Map
      */
 
-    public Map checkForSimilarNamedCards(ArrayList<Card> hand) {
+    public static Map checkForSimilarNamedCards(ArrayList<Card> hand) {
         Map<String, Integer> kindMap = new HashMap<String, Integer>();
         Iterator<Card> cardIterator = hand.iterator();
-        System.out.println(hand.size());
         while (cardIterator.hasNext()) {
             Card tempCard = cardIterator.next();
             if (kindMap.containsKey(tempCard.getName())) {
@@ -100,7 +100,7 @@ public class Poker implements Game {
      * @return Kinds enum
      */
 
-    public Kinds checkForFlushCards(ArrayList<Card> hand) {
+    public static Kinds checkForFlushCards(ArrayList<Card> hand) {
         Map<String, Integer> kindMap = new HashMap<String, Integer>();
         Iterator<Card> cardIterator = hand.iterator();
 
@@ -114,7 +114,7 @@ public class Poker implements Game {
                 kindMap.put(tempCard.getSuit(), 1);
             }
         }
-        if (kindMap.size() == 5) {
+        if (kindMap.size() == 1) {
             return Kinds.FLUSH;
         }
 
@@ -128,13 +128,11 @@ public class Poker implements Game {
      * @return
      */
 
-    public Kinds InterpretSimilarCardsToPokerHand(Map hashMap) {
+    public static Kinds InterpretSimilarCardsToPokerHand(Map hashMap) {
 
         List<Kinds> kindsList = new ArrayList<Kinds>();
         int count = 0;
         Map<String, Integer> map = hashMap;
-
-        System.out.println(map.keySet());
 
         for (String string : map.keySet()) {
             if (count < 5) {
@@ -164,40 +162,57 @@ public class Poker implements Game {
             } else {
                 return Kinds.TWOPAIRS;
             }
+        } else if (kindsList.size() == 0) {
+            return Kinds.NOGOODCARDS;
         } else {
             return kindsList.get(0);
         }
     }
-/*
-    public int returnPlayerScore() {
-        if (checkForFlushCards() == Kinds.FLUSH) {
+
+    /**
+     * Returns a number rank of a players hand for comparison to the Dealer's hand
+     *
+     * @param hand
+     * @return
+     */
+
+    public static int returnPlayerScore(ArrayList<Card> hand) {
+        if (checkForFlushCards(hand) == Kinds.FLUSH) {
             return flush;
+        } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.FOURKINDS) {
+            return fourOfAKind;
+        } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.FULLHOUSE) {
+            return fullHouse;
+        } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.PAIR) {
+            return onePair;
+        } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.TWOPAIRS) {
+            return twoPair;
+        } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.THREEKINDS) {
+            return threeOfAKind;
+        } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.STRAIGHT) {
+            return straight;
+        } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.NOGOODCARDS) {
+            return noRankedHand;
         } else {
-            switch (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards())) {
-                case Kinds.FOURKINDS:
-                    return fourOfAKind;
-                break;
-                case Kinds.FULLHOUSE:
-                    return;
-                fullHouse;
-                break;
-                case Kinds.PAIR:
-                    return onePair;
-                break;
-                case Kinds.THREEKINDS:
-                    return threeOfAKind;
-                break;
-                case Kinds.TWOPAIRS:
-                    return twoPair;
-                break;
-                case Kinds.STRAIGHT:
-                    return straight;
-                break;
-                default:
-                    return royalFlush;
-            }
+            return royalFlush;
         }
-    }*/
+
+    }
+
+    public static int returnDealerScore() {
+        Random ran = new Random();
+        int x = (ran.nextInt(6) + 3) * 100;
+        if (x == 800) {
+            System.out.println("Tough luck chump, I got a Royal Flush!");
+        } else if (x <= 700 && x >= 500) {
+            System.out.println("Don't take it personal when I win this round, not everyone is as lucky as me.");
+        } else if (x <= 400 && x > 300) {
+            System.out.println("I've got a knack for getting just what I need when I need it.");
+        } else if (x <= 200) {
+            System.out.println("The world needs its losers. I just never thought I'd be one.");
+        }
+        return x;
+    }
 
     /**
      * Compares the enum to an int skill then generates and compares to Dealer
@@ -217,7 +232,7 @@ public class Poker implements Game {
 
     }
 
-   // public ArrayList<Card> hand;
+    // public ArrayList<Card> hand;
 
     /////////////////////Where Code Runs/////////////////////////
     public static void main(String[] args) {
@@ -225,24 +240,24 @@ public class Poker implements Game {
         int pot = 0;
 
 
-
 //Dummy Hand
 
+
         Card firstCard = new Card();
-        firstCard.setName("King");
+        firstCard.setName("Four");
         firstCard.setSuit(Suit.DIAMONDS);
         Card secondCard = new Card();
-        secondCard.setName("King");
-        secondCard.setSuit(Suit.CLUBS);
+        secondCard.setName("Five");
+        secondCard.setSuit(Suit.HEARTS);
         Card thirdCard = new Card();
-        thirdCard.setName("Nine");
-        thirdCard.setSuit(Suit.DIAMONDS);
+        thirdCard.setName("Six");
+        thirdCard.setSuit(Suit.SPADES);
         Card fourthCard = new Card();
-        fourthCard.setName("Nine");
-        fourthCard.setSuit(Suit.SPADES);
+        fourthCard.setName("Eight");
+        fourthCard.setSuit(Suit.DIAMONDS);
         Card fifthCard = new Card();
-        fifthCard.setName("King");
-        fifthCard.setSuit(Suit.HEARTS);
+        fifthCard.setName("Seven");
+        fifthCard.setSuit(Suit.DIAMONDS);
 
         ArrayList<Card> hand = new ArrayList<Card>();
 
@@ -306,33 +321,36 @@ public class Poker implements Game {
 /**
  *Player prompted to bet
  */
-            System.out.println("Your hand contains..." + "\n");
-        for(int i = 0; i<hand.size(); i++){
-            System.out.print("A " + hand.get(i).getName() + " of " + hand.get(i).getSuit() + "\n");
+            System.out.println("Here is your hand..." + "\n");
+            for (int i = 0; i < hand.size(); i++) {
+                System.out.print("A " + hand.get(i).getName() + " of " + hand.get(i).getSuit() + "\n");
 
-        }
+            }
             System.out.println("\n" + "Enter the amount you wish to wager.");
             Scanner scanner = new Scanner(System.in);
             int x = scanner.nextInt();
             player.bet(x);
             pot = x;
 
-
-/**
- * Evaluates the current hand states for Player and Dealer
- */
-            System.out.println(poker.checkForSimilarNamedCards(hand));
-            System.out.println(poker.InterpretSimilarCardsToPokerHand(poker.checkForSimilarNamedCards(hand)));
-
-
 /**
  * Checks to see who the winner is
  */
 
+            System.out.println(returnPlayerScore(hand));
+
+
+            if (returnPlayerScore(hand) > returnDealerScore()) {
+                System.out.println("\n" + "Well now, look at that. You won!");
+                player.addToBank(pot * 2);
+            } else {
+                System.out.println("\n" + "Sorry kiddo, you lost! Looks like you're all outta luck.");
+            }
+
 
 /**
  * This Method exits the Poker game loop
- */System.out.println("Ending Poker");
+ */
+            System.out.println("\n" + "Ending Poker");
             poker.changeGameState();
         }
     }
