@@ -36,7 +36,7 @@ public class BlackJack implements CardGame {
             hands.put(player.getName(), DEALER.dealCards(2, deck));
             System.out.println("Your bank total is " + player.getBank() + " dollars. ");
             System.out.println("Please enter bet amount as an Integer:");
-            currentPot+=player.bet(Integer.parseInt(key.nextLine()));
+            currentPot += player.bet(Integer.parseInt(key.nextLine()));
 
 
             DEALER.addToHand(DEALER.dealCards(2, deck));
@@ -57,11 +57,11 @@ public class BlackJack implements CardGame {
                 }
 
             }
-
-
+            /**
+             * Add case for going over
+             */
+            System.out.println("Your cards: " + hands.get(player.getName()) + " You have " + evaluatePoints(hands.get(player.getName())) + " points.");
             System.out.println("Dealer has " + DEALER.getHand());
-
-
 
 
             while (evaluatePoints(DEALER.getHand()) < (evaluatePoints(hands.get(player.getName()))) && evaluatePoints(hands.get(player.getName())) <= 21) {
@@ -71,20 +71,16 @@ public class BlackJack implements CardGame {
             }
 
 
-
-            if((evaluatePoints(DEALER.getHand()) > evaluatePoints(hands.get(player.getName())) && evaluatePoints(DEALER.getHand()) <= 21) || (evaluatePoints(hands.get(player.getName()))> 21)) {
+            if ((evaluatePoints(DEALER.getHand()) > evaluatePoints(hands.get(player.getName())) && evaluatePoints(DEALER.getHand()) <= 21) || (evaluatePoints(hands.get(player.getName())) > 21)) {
                 System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
-            }
-            else if(evaluatePoints(DEALER.getHand()) < evaluatePoints(hands.get(player.getName())) && evaluatePoints(hands.get(player.getName())) <= 21 || evaluatePoints((DEALER.getHand()))>21) {
+            } else if (evaluatePoints(DEALER.getHand()) < evaluatePoints(hands.get(player.getName())) && evaluatePoints(hands.get(player.getName())) <= 21 || evaluatePoints((DEALER.getHand())) > 21) {
 
                 player.addToBank(currentPot * 2);
-                System.out.println(player.getName() + " WON "+ (currentPot*2) );
-            }
-            else{
+                System.out.println(player.getName() + " WON " + (currentPot * 2));
+            } else {
                 player.addToBank(currentPot);
-                System.out.println("It was a tie! Here's your money back you scrub.");
+                System.out.println("It was a tie! Here's your money back... scrub.");
             }
-
 
 
             System.out.println("Your bank is now " + player.getBank());

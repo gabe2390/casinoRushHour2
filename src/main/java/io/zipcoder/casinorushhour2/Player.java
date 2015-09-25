@@ -33,8 +33,15 @@ public class Player {
      * @return bet amount
      */
     public int bet(int b){
-        bank -= b;
-        return b;
+        if(b<1){
+            System.out.println("Not a valid bet, nice try jerk. Multiplied by -1! Your bet is " + -b);
+            bank -= -b;
+            return -b;
+        }
+        else{
+            bank -= b;
+            return b;
+        }
     }
 
     /**
