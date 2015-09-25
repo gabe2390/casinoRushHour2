@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Dealer {
 
-    List<Card> hand;
+   private List<Card> hand;
 
     public Dealer() {
         hand = new ArrayList<Card>();
@@ -25,7 +25,22 @@ public class Dealer {
         return dealtCards;
     }
 
+
+
     public void shuffleDeck(Deck deck){
         Collections.shuffle(deck.getCards());
+
+    }
+
+
+
+    public List<Card> getHand(){
+        return hand;
+    }
+
+
+
+    public void addToHand(List<Card> cards){
+       hand.addAll(cards);
     }
 }

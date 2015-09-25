@@ -49,5 +49,7 @@ public class Deck {
         return cards;
     }
 
+    public void resetDeck(){
 
+    }
 }
