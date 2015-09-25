@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Gabriel Humphrey on 9/23/15.
  * This Class is the template for a card that will be used to build a Deck.
  */
-public class Card {
+public class    Card {
     private String name;
     private Suit SUIT;
 
