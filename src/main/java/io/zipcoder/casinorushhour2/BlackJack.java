@@ -31,7 +31,9 @@ public class BlackJack implements CardGame {
         while (state == GameState.RUNNING) {
 
             DEALER.shuffleDeck(deck);
+
             hands.put(player.getName(), DEALER.dealCards(2, deck));
+            DEALER.dealCards(2,deck);
 
             while (wantToHit) {
                 System.out.println("Your cards: " + hands.get(player.getName()) + ". You have " + evaluatePoints(hands.get(player.getName())) + " points.");
@@ -39,17 +41,18 @@ public class BlackJack implements CardGame {
 
                 if (key.nextLine().equals("Y")) {
                     List<Card> newHand = hands.get(player.getName());
-                    newHand.addAll(dealer.dealCards(1, deck));
+                    newHand.addAll(DEALER.dealCards(1, deck));
                     hands.put(player.getName(), newHand);
                 } else {
                     wantToHit = false;
                 }
             }
             //cards dealt
+            //dealer deals own cards
+
             //bet
             //askForHit
             //done hitting
-            //dealer deals own cards
             //dealer hits if necessary
             //determine winner
             //if player is winner add to their bank
@@ -98,7 +101,13 @@ public class BlackJack implements CardGame {
     }
 
     public int alternateAcePoints(int i) {
-        return
+        return i + 10;
+    }
+    public boolean giveCardsBack(List<Card> hand){
+        int deckSize= deck.getCards().size();
+
+        deck.getCards().addAll(hand);
+        return deck.getCards().size() == deckSize+ hand.size();
     }
 
     public static void main(String[] args) {
