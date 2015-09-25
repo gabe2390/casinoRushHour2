@@ -1,11 +1,15 @@
 package io.zipcoder.casinorushhour2;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by rsparks on 9/24/15.
  */
 public class Dealer {
-/*
-    List<Card> hand;
+
+    ArrayList<Card> hand ;
 
     public Dealer() {
         hand = new ArrayList<Card>();
@@ -23,5 +27,9 @@ public class Dealer {
 
     public void shuffleDeck(Deck deck) {
         Collections.shuffle(deck.getCards());
-    }*/
+    }
+
+    public void addToHand(List<Card> cards){
+        hand.addAll(cards);
+    }
 }
