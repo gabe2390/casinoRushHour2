@@ -198,19 +198,19 @@ public class FiveCardDraw implements CardGame {
         Scanner scanner = new Scanner(System.in);
         String exchange;
 
-        for(int i = 0; i < playerHand.size(); i++) {
+        for (int i = 0; i < playerHand.size(); i++) {
             System.out.println("Would you like to exchange your " + playerHand.get(i).getName() + " of " + playerHand.get(i).getSuit() + "? (Y) or (N)");
             exchange = scanner.nextLine();
 
-            if (!exchange.equals("N")){
+            if (!exchange.equals("N")) {
                 pokerDeck.getCards().add(playerHand.get(i));
                 DEALER.shuffleDeck(pokerDeck);
                 tempMap.put(i, playerHand.get(i));
                 List<Card> tempCardArray = DEALER.dealCards(playerHand.size(), pokerDeck);
-                for(int j = 0; j < playerHand.size(); j++) {
-                    if(tempMap.containsValue(playerHand.get(j))) {
+                for (int j = 0; j < playerHand.size(); j++) {
+                    if (tempMap.containsValue(playerHand.get(j))) {
                         playerHand.set(j, tempCardArray.get(j));
-                    }else {
+                    } else {
                         pokerDeck.getCards().add(tempCardArray.get(j));
                     }
                 }
@@ -432,7 +432,7 @@ public class FiveCardDraw implements CardGame {
      * Compares the enum to an int skill then generates and compares to Dealer
      */
 
-    public void checkForWinner() {
+    public boolean checkForWinner() {
 
         if (returnPlayerScore((ArrayList<Card>) playerHand) >= returnDealerScore()) {
             System.out.println("\n" + "Yeah, yeah, you won. No big deal." + "\n");
@@ -441,7 +441,7 @@ public class FiveCardDraw implements CardGame {
             System.out.println("\n" + "Looks like you lost this one. No hard feelings though, right?" + "\n");
         }
 
-
+        return true;
     }
 
 

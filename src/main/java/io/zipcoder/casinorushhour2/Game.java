@@ -18,11 +18,6 @@ public interface Game {
     void playGame();
 
     /**
-     * Changes game state from NOTRUNNING to RUNNING or vice versa
-     */
-    void changeGameState();
-
-    /**
      * Exits you to the Main Menu (Casino Menu)
      */
     void exitGame();
@@ -31,5 +26,5 @@ public interface Game {
      * Checks for a winner of a particular game
      * @return boolean -- Win or Lose
      */
-    void checkForWinner();
+    boolean checkForWinner();
 }

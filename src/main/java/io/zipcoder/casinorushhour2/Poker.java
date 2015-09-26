@@ -60,6 +60,7 @@ public class Poker implements CardGame {
 
         while (state == GameState.RUNNING) {
             printImage();
+
             System.out.println("Welcome to the Five Card Stud table.");
             System.out.println("Don't lose your head." + "\n");
 
@@ -67,20 +68,25 @@ public class Poker implements CardGame {
             DEALER.shuffleDeck(pokerDeck);
             dealACardToPlayer(5);
 
-            promptPlayerToBet();
-            checkForWinner();
+            printCards(playerHand);
+            pot = askToBet(key);
+
+
+            if (checkForWinner()) {
+                player.addToBank(pot);
+                System.out.println("\n" + "Well now, look at that. You won!" + "\n");
+            } else {
+                System.out.println("\n" + "Sorry kiddo, you lost! Looks like you're all outta luck." + "\n");
+            }
+
+            System.out.println(giveCardsBack(playerHand));
+
             System.out.println("Do you want to play again?");
 
             if (!key.nextLine().equals("Y")) {
                 exitGame();
             }
-
-            pokerDeck.getCards().addAll(playerHand);
-            playerHand.clear();
-
         }
-
-
     }
 
     private void printImage() {
@@ -113,55 +119,41 @@ public class Poker implements CardGame {
         playerHand.addAll(DEALER.dealCards(i, pokerDeck));
     }
 
-    /**
-     *
-     */
-    public int promptPlayerToBet() {
-        int x = 0;
+    public boolean giveCardsBack(List<Card> hand) {
+        int deckSize = pokerDeck.getCards().size();
 
-        System.out.println("Here is your hand..." + "\n");
-        for (int i = 0; i < playerHand.size(); i++) {
-            System.out.print("A " + playerHand.get(i).getName() + " of " + playerHand.get(i).getSuit() + "\n");
+        for (int i = 0; i < hand.size(); i++) {
+            pokerDeck.getCards().add(hand.remove(0));
         }
-        try {
-            System.out.println("\n" + "Enter the amount you wish to wager.");
-            Scanner scanner = new Scanner(System.in);
-            x = scanner.nextInt();
-            pokerPlayer.bet(x);
-            pot = x;
-        } catch (InputMismatchException e) {
-            System.out.println("Whats that? 1000? Yeah, that sounds about right." + "\n");
-            x = 1000;
-            pokerPlayer.bet(x);
-            pot = x;
-        }
+        hand.clear();
 
+        return pokerDeck.getCards().size() == deckSize + hand.size();
     }
 
 
-    /**
-     * Changes the GameState to the opposite of it's current state
-     */
+    private int askToBet(Scanner key) {
+        int bet;
 
-    public void changeGameState() {
-        if (state == NOTRUNNING) {
-            currentState = RUNNING;
-        } else {
-            currentState = NOTRUNNING;
-        }
+        System.out.println("Your bank total is $" + player.getBank() + " dollars.");
+        System.out.println("Please enter bet amount as an Integer:");
+
+        bet = player.bet(Integer.parseInt(key.nextLine()));
+
+        System.out.println("Your bank is now at $" + player.getBank());
+        return bet;
     }
 
+    private void printCards(List<Card> cards) {
+        System.out.println(cards);
+    }
 
     /**
      * Leaves the current Poker game
      */
 
     public void exitGame() {
-
         System.out.println("\n" + "Ending Poker");
-        currentState = NOTRUNNING;
-
-
+        state = NOTRUNNING;
     }
 
     /**
@@ -195,7 +187,6 @@ public class Poker implements CardGame {
         Map<String, Integer> kindMap = new HashMap<String, Integer>();
         Iterator<Card> cardIterator = hand.iterator();
 
-
         while (cardIterator.hasNext()) {
             Card tempCard = cardIterator.next();
             if (kindMap.containsKey(tempCard.getSuit())) {
@@ -208,7 +199,6 @@ public class Poker implements CardGame {
         if (kindMap.size() == 1) {
             return Kinds.FLUSH;
         }
-
         return Kinds.NOFLUSH;
     }
 
@@ -311,30 +301,27 @@ public class Poker implements CardGame {
      * Compares the enum to an int skill then generates and compares to Dealer
      */
 
-    public void checkForWinner() {
-
-        if (returnPlayerScore((ArrayList<Card>) playerHand) >= returnDealerScore()) {
-            System.out.println("\n" + "Well now, look at that. You won!" + "\n");
-            pokerPlayer.addToBank(pot * 2);
-        } else {
-            System.out.println("\n" + "Sorry kiddo, you lost! Looks like you're all outta luck." + "\n");
-        }
-
-
+    public boolean checkForWinner() {
+        return returnPlayerScore((ArrayList<Card>) playerHand) >= returnDealerScore();
     }
 
 
     /////////////////////Where Code Runs/////////////////////////
 
+    /**
+     * Enum of the kinds of possible Poker Hands
+     */
+    enum Kinds {
+        PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
+    }
 
+    public static void main(String[] args) {
+        Player p = new Player("Gabe");
+        Poker poker = new Poker(new Deck(p));
+        poker.playGame();
+    }
 }
 
-/**
- * Enum of the kinds of possible Poker Hands
- */
-public enum Kinds {
-    PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
-}
 
 
 
