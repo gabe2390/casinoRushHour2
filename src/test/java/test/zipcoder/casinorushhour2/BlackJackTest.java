@@ -7,8 +7,6 @@ import org.junit.Test;
  * Created by ghumphrey on 9/24/15.
  */
 public class BlackJackTest {
-    BlackJack jack;
 
-  //  @Test
 
 }

@@ -15,6 +15,7 @@ public class BlackJack implements CardGame {
     Player player;
     Deck deck;
     Map<String, List<Card>> hands;
+    int currentPot;
 
     public BlackJack(Deck deck) {
         this.deck = deck;
@@ -28,7 +29,7 @@ public class BlackJack implements CardGame {
         Scanner key = new Scanner(System.in);
         boolean wantToHit = true;
         state = GameState.RUNNING;
-        int currentPot = 0;
+
 
         while (state == GameState.RUNNING) {
 
@@ -57,10 +58,12 @@ public class BlackJack implements CardGame {
                 }
 
             }
-            /**
-             * Add case for going over
-             */
-            System.out.println("Your cards: " + hands.get(player.getName()) + " You have " + evaluatePoints(hands.get(player.getName())) + " points.");
+            if (evaluatePoints(hands.get(player.getName())) > 21) {
+                System.out.println("Your cards: " + hands.get(player.getName()) + " BUST! with " + evaluatePoints(hands.get(player.getName())) + " points.");
+            } else {
+                System.out.println("Your cards: " + hands.get(player.getName()) + " You have " + evaluatePoints(hands.get(player.getName())) + " points.");
+            }
+
             System.out.println("Dealer has " + DEALER.getHand());
 
 
@@ -71,17 +74,7 @@ public class BlackJack implements CardGame {
             }
 
 
-            if ((evaluatePoints(DEALER.getHand()) > evaluatePoints(hands.get(player.getName())) && evaluatePoints(DEALER.getHand()) <= 21) || (evaluatePoints(hands.get(player.getName())) > 21)) {
-                System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
-            } else if (evaluatePoints(DEALER.getHand()) < evaluatePoints(hands.get(player.getName())) && evaluatePoints(hands.get(player.getName())) <= 21 || evaluatePoints((DEALER.getHand())) > 21) {
-
-                player.addToBank(currentPot * 2);
-                System.out.println(player.getName() + " WON " + (currentPot * 2));
-            } else {
-                player.addToBank(currentPot);
-                System.out.println("It was a tie! Here's your money back... scrub.");
-            }
-
+            checkForWinner();
 
             System.out.println("Your bank is now " + player.getBank());
 
@@ -123,8 +116,19 @@ public class BlackJack implements CardGame {
 
     }
 
-    public void checkForWinner() {
 
+    public void checkForWinner() {
+        if ((evaluatePoints(DEALER.getHand()) > evaluatePoints(hands.get(player.getName())) && evaluatePoints(DEALER.getHand()) <= 21) || (evaluatePoints(hands.get(player.getName())) > 21)) {
+            System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
+        } else if (evaluatePoints(DEALER.getHand()) < evaluatePoints(hands.get(player.getName())) && evaluatePoints(hands.get(player.getName())) <= 21 || evaluatePoints((DEALER.getHand())) > 21) {
+
+            player.addToBank(currentPot * 2);
+            System.out.println(player.getName() + " WON " + (currentPot * 2));
+        } else {
+            player.addToBank(currentPot);
+            System.out.println("It was a tie! Here's your money back... scrub.");
+        }
+        currentPot = 0;
     }
 
     public void setAllCardPoints(Deck deck) {
