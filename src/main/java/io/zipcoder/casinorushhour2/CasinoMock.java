@@ -15,13 +15,21 @@ public class CasinoMock {
 
         Deck deck = new Deck(player);
 
-        Poker poker = new Poker(deck);
+        // SevenCardStud sevenCardStudPoker = new SevenCardStud(deck);
+
+        // Poker poker = new Poker(deck);
+
+       //  FiveCardDraw fiveCardDraw = new FiveCardDraw((deck));
+
+        SevenCardDraw sevenCardDraw = new SevenCardDraw(deck);
 
 /**
  * This Method changes the current GameState to start the game loop
  */
-
-        poker.playGame();
+        sevenCardDraw.playGame();
+        //fiveCardDraw.playGame();
+        //poker.playGame();
+        // sevenCardStudPoker.playGame();
 
 /**
  * Deals cards to player
@@ -29,20 +37,14 @@ public class CasinoMock {
  */
 
 
-
-
 /**
  * Checks to see who the winner is
  */
 
 
-
-
 /**
  * This Method exits the Poker game loop
  */
-
-
 
 
     }
