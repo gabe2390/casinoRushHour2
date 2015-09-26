@@ -29,7 +29,6 @@ public class Dealer {
 
     public void shuffleDeck(Deck deck){
         Collections.shuffle(deck.getCards());
-
     }
 
 
