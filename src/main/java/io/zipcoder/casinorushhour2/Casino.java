@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Casino {
     private GameSelection currentGame;
     private RussianRoulette russian;
+    private BlackJack blackJack;
     private Player player;
 
     public Casino() {
@@ -48,10 +49,16 @@ public class Casino {
 
     public void enterGame(GameSelection game) {
         switch(game){
+            case Blackjack:{
+                blackJack= new BlackJack(new Deck(player));
+                blackJack.playGame();
+                break;
+            }
             case Leave_Casino: {
                 if(player.getBank() <0) {
                     russian = new RussianRoulette(new Gun(player));
                     russian.playGame();
+                    break;
                 }
             }
         }

@@ -123,8 +123,8 @@ public class BlackJack implements CardGame {
 
     }
 
-    public void checkForWinner() {
-
+    public boolean checkForWinner() {
+        return true;
     }
 
     public void setAllCardPoints(Deck deck) {
