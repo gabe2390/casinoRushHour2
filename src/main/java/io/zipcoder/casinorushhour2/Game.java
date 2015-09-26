@@ -26,5 +26,5 @@ public interface Game {
      * Checks for a winner of a particular game
      * @return boolean -- Win or Lose
      */
-    void checkForWinner();
+    boolean checkForWinner();
 }
