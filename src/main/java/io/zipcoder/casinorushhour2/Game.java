@@ -13,11 +13,6 @@ public interface Game {
     void playGame();
 
     /**
-     * Changes game state from NOTRUNNING to RUNNING or vice versa
-     */
-    void changeGameState();
-
-    /**
      * Exits you to the Main Menu (Casino Menu)
      */
     void exitGame();

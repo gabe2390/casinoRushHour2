@@ -71,10 +71,6 @@ public class RussianRoulette implements Game {
         }
     }
 
-    public void changeGameState() {
-
-    }
-
     public void exitGame() {
         state= GameState.NOTRUNNING;
     }
@@ -86,17 +82,6 @@ public class RussianRoulette implements Game {
      */
     public boolean checkForWinner() {
         return gun.shoot();
-    }
-
-    public static void main(String[] args) {
-        Player p = new Player("Gabe");
-        p.addToBank(-5000);
-        System.out.println(p == null);
-        System.out.println(p.getBank());
-
-        RussianRoulette r = new RussianRoulette(new Gun(p));
-
-        r.playGame();
     }
 
     /**
