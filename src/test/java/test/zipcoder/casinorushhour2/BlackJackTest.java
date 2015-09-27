@@ -13,7 +13,6 @@ import java.util.Map;
  * Created by ghumphrey on 9/24/15.
  */
 public class BlackJackTest {
-<<<<<<< HEAD
     BlackJack jack;
     Dealer dealer;
     Deck deck;
@@ -52,8 +51,4 @@ public class BlackJackTest {
 
 
     }
-=======
-
->>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
-
 }
