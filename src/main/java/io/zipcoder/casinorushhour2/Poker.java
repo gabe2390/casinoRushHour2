@@ -66,9 +66,14 @@ public class Poker implements CardGame {
 
             DEALER.shuffleDeck(pokerDeck);
             DEALER.shuffleDeck(pokerDeck);
-            dealACardToPlayer(5);
+            System.out.println(pokerDeck.getCards().size());
+
+            playerHand.addAll(DEALER.dealCards(5, pokerDeck));
+            DEALER.addToHand(DEALER.dealCards(5, pokerDeck));
 
             printCards(playerHand);
+            printCards(DEALER.hand);
+
             pot = askToBet(key);
 
 
@@ -80,7 +85,7 @@ public class Poker implements CardGame {
             }
 
             System.out.println(giveCardsBack(playerHand));
-
+            System.out.println(giveCardsBack(DEALER.hand));
             System.out.println("Do you want to play again?");
 
             if (!key.nextLine().equals("Y")) {
@@ -115,22 +120,36 @@ public class Poker implements CardGame {
                 "???????????????????????????????????????*#######################################" + "\n");
     }
 
-    public void dealACardToPlayer(int i) {
+    public void dealCards(int i, List<Card> hand) {
         playerHand.addAll(DEALER.dealCards(i, pokerDeck));
     }
 
+    /**
+     * returns the cards in a hand to the deck
+     *
+     * @param hand
+     * @return boolean
+     */
     public boolean giveCardsBack(List<Card> hand) {
         int deckSize = pokerDeck.getCards().size();
+        int handSize = hand.size();
 
-        for (int i = 0; i < hand.size(); i++) {
+        for (int i = 0; i < handSize; i++) {
             pokerDeck.getCards().add(hand.remove(0));
         }
-        hand.clear();
 
-        return pokerDeck.getCards().size() == deckSize + hand.size();
+        System.out.println("Card hand size after give back: " + hand.size());
+        System.out.println("Deck size after give back : " + pokerDeck.getCards().size());
+
+        return pokerDeck.getCards().size() == deckSize +handSize;
     }
 
-
+    /**
+     * prompt player to bet, subtract that amount from player's bank, and return that amount to add to the pot
+     *
+     * @param key
+     * @return int
+     */
     private int askToBet(Scanner key) {
         int bet;
 
@@ -143,14 +162,24 @@ public class Poker implements CardGame {
         return bet;
     }
 
+    /**
+     * print cards on the screen
+     *
+     * @param cards
+     */
     private void printCards(List<Card> cards) {
+        Collections.sort(cards, new Comparator<Card>() {
+            public int compare(Card o1, Card o2) {
+                return -o1.getSuit().compareTo(o2.getSuit());
+            }
+        });
+
         System.out.println(cards);
     }
 
     /**
      * Leaves the current Poker game
      */
-
     public void exitGame() {
         System.out.println("\n" + "Ending Poker");
         state = NOTRUNNING;
@@ -161,7 +190,6 @@ public class Poker implements CardGame {
      *
      * @return Map
      */
-
     public static Map checkForSimilarNamedCards(ArrayList<Card> hand) {
         Map<String, Integer> kindMap = new HashMap<String, Integer>();
         Iterator<Card> cardIterator = hand.iterator();
@@ -182,7 +210,6 @@ public class Poker implements CardGame {
      *
      * @return Kinds enum
      */
-
     public static Kinds checkForFlushCards(ArrayList<Card> hand) {
         Map<String, Integer> kindMap = new HashMap<String, Integer>();
         Iterator<Card> cardIterator = hand.iterator();
@@ -208,7 +235,6 @@ public class Poker implements CardGame {
      * @param hashMap
      * @return
      */
-
     public Kinds InterpretSimilarCardsToPokerHand(Map hashMap) {
 
         List<Kinds> kindsList = new ArrayList<Kinds>();
@@ -256,7 +282,6 @@ public class Poker implements CardGame {
      * @param hand
      * @return
      */
-
     public int returnPlayerScore(ArrayList<Card> hand) {
         if (checkForFlushCards(hand) == Kinds.FLUSH) {
             return flush;
@@ -280,6 +305,9 @@ public class Poker implements CardGame {
 
     }
 
+    /**
+     * @return
+     */
     public int returnDealerScore() {
         Random ran = new Random();
         int x = (ran.nextInt(1) + 1) * 100 + (ran.nextInt(3) - 1) * 100;
