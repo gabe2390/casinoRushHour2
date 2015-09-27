@@ -12,6 +12,7 @@ public class BlackJack implements CardGame {
     Player player;
     Deck deck;
     Map<String, List<Card>> hands;
+<<<<<<< HEAD
     String[] computerNames;
 
     /**
@@ -20,6 +21,10 @@ public class BlackJack implements CardGame {
      *
      * @param deck
      */
+=======
+    int currentPot;
+
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
     public BlackJack(Deck deck) {
         this.deck = deck;
         deck.init();
@@ -37,6 +42,10 @@ public class BlackJack implements CardGame {
         Scanner key = new Scanner(System.in);
         boolean wantToHit = true;
         state = GameState.RUNNING;
+<<<<<<< HEAD
+=======
+
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
 
         int currentPot = 0;
 
@@ -54,19 +63,41 @@ public class BlackJack implements CardGame {
             //determine winner
             //if player is winner add to their bank
 
+<<<<<<< HEAD
             currentPot = askToBet(key);
+=======
+            int totalPoints = evaluatePoints(hands.get(player.getName()));
+
+            System.out.println("Dealer has a " + DEALER.getHand().size() + " cards. " + DEALER.getHand().get(0) + " face up ");
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
 
             dealCards();
 
+<<<<<<< HEAD
             printPoints(hands.get(player.getName()));
 
             while (wantToHit) {
                 if (evaluatePoints(hands.get(player.getName())) < 21) {
                     wantToHit = askForHit(key);
+=======
+            while (wantToHit && evaluatePoints(hands.get(player.getName())) < 21) {
+
+
+                System.out.println("Your cards: " + hands.get(player.getName()) + " You have " + evaluatePoints(hands.get(player.getName())) + " points.");
+                System.out.println("Would you like to hit?");
+
+
+
+                if (key.nextLine().equalsIgnoreCase("Y")) {
+                    List<Card> newHand = hands.get(player.getName());
+                    newHand.addAll(DEALER.dealCards(1, deck));
+                    hands.put(player.getName(), newHand);
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
                 } else {
                     playerPoints= evaluatePoints(hands.get(player.getName()));
                     break;
                 }
+<<<<<<< HEAD
             }
 
             if(evaluatePoints(hands.get(player.getName())) >21){
@@ -84,6 +115,24 @@ public class BlackJack implements CardGame {
             /**
              * Add case for going over
              */
+=======
+                for( Card card: hands.get(player.getName())) {
+                    if(card.getName().equals("Ace")){
+                        System.out.println("working");
+                    }
+
+                };
+
+            }
+            if (evaluatePoints(hands.get(player.getName())) > 21) {
+                System.out.println("Your cards: " + hands.get(player.getName()) + " BUST! with " + evaluatePoints(hands.get(player.getName())) + " points.");
+            } else {
+                System.out.println("Your cards: " + hands.get(player.getName()) + " You have " + evaluatePoints(hands.get(player.getName())) + " points.");
+            }
+
+            System.out.println("Dealer has " + DEALER.getHand());
+
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
 
             while (evaluatePoints(DEALER.getHand()) < (evaluatePoints(hands.get(player.getName()))) && evaluatePoints(hands.get(player.getName())) <= 21) {
                 System.out.println("DEALER HIT!!!!\n");
@@ -92,17 +141,7 @@ public class BlackJack implements CardGame {
             }
 
 
-            if ((evaluatePoints(DEALER.getHand()) > evaluatePoints(hands.get(player.getName())) && evaluatePoints(DEALER.getHand()) <= 21) || (evaluatePoints(hands.get(player.getName())) > 21)) {
-                System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
-            } else if (evaluatePoints(DEALER.getHand()) < evaluatePoints(hands.get(player.getName())) && evaluatePoints(hands.get(player.getName())) <= 21 || evaluatePoints((DEALER.getHand())) > 21) {
-
-                player.addToBank(currentPot * 2);
-                System.out.println(player.getName() + " WON " + (currentPot * 2));
-            } else {
-                player.addToBank(currentPot);
-                System.out.println("It was a tie! Here's your money back... scrub.");
-            }
-
+            checkForWinner();
 
             System.out.println("Your bank is now " + player.getBank());
 
@@ -136,9 +175,25 @@ public class BlackJack implements CardGame {
 
     }
 
+<<<<<<< HEAD
     public boolean checkForWinner() {
 
         return false;
+=======
+
+    public void checkForWinner() {
+        if ((evaluatePoints(DEALER.getHand()) > evaluatePoints(hands.get(player.getName())) && evaluatePoints(DEALER.getHand()) <= 21) || (evaluatePoints(hands.get(player.getName())) > 21)) {
+            System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
+        } else if (evaluatePoints(DEALER.getHand()) < evaluatePoints(hands.get(player.getName())) && evaluatePoints(hands.get(player.getName())) <= 21 || evaluatePoints((DEALER.getHand())) > 21) {
+
+            player.addToBank(currentPot * 2);
+            System.out.println(player.getName() + " WON " + (currentPot * 2));
+        } else {
+            player.addToBank(currentPot);
+            System.out.println("It was a tie! Here's your money back... scrub.");
+        }
+        currentPot = 0;
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
     }
 
     /**
@@ -232,12 +287,15 @@ public class BlackJack implements CardGame {
         return points;
     }
 
+<<<<<<< HEAD
     /**
      * returns the soft hand points of a player's hand
      *
      * @param i
      * @return
      */
+=======
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
     private int alternateAcePoints(int i) {
         if (i < 11) {
             return i + 10;
@@ -246,6 +304,7 @@ public class BlackJack implements CardGame {
         }
     }
 
+<<<<<<< HEAD
     /**
      * prints all the cards in a player's or dealer's hand, as well as their points
      *
@@ -282,6 +341,9 @@ public class BlackJack implements CardGame {
      * @param hand
      * @return
      */
+=======
+
+>>>>>>> eb8147356373fc3cd53917a2ba0bb450111aef78
     public boolean giveCardsBack(List<Card> hand) {
         int deckSize = deck.getCards().size();
 
