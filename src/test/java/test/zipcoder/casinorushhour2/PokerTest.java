@@ -30,7 +30,6 @@ public class PokerTest {
     ArrayList<Card> playerHand = new ArrayList<Card>();
 
 
-
     @Before
     public void staging() {
         playerTest = new Player("test");
@@ -92,7 +91,7 @@ public class PokerTest {
     }
 
     /**
-     *  Test should return a integer equal to the evaluated poker card combination in a player's hand
+     * Test should return a integer equal to the evaluated poker card combination in a player's hand
      */
 
     @Test
@@ -108,13 +107,4 @@ public class PokerTest {
     public void shouldReturnARandomInt() {
         assertTrue("Random number is within 0 and 800" + pokerTest.returnDealerScore(), 0 <= pokerTest.returnDealerScore() && pokerTest.returnDealerScore() <= 800);
     }
-
-    @Test
-    public void shouldReturnABoolean() {
-        assertTrue("Should return false", pokerTest.checkForWinner());
-    }
-
-
-
-
 }

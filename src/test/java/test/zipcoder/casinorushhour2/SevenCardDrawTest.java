@@ -85,16 +85,6 @@ public class SevenCardDrawTest {
     }
 
     /**
-     * Test for whether a player hand contains a flush
-     */
-
-    @Test
-    public void givenAPlayerHandShouldReturnEnum() {
-        assertEquals("Should return no flush", SevenCardDraw.Kinds.NOFLUSH, SevenCardDraw.checkForFlushCards(playerHand));
-    }
-
-
-    /**
      * Test should determine if the random number generated from DealerScore is between 0 and 800
      */
 
@@ -102,7 +92,5 @@ public class SevenCardDrawTest {
     public void shouldReturnARandomInt() {
         assertTrue("Random number is within 0 and 800" + pokerTest.returnDealerScore(), 0 <= pokerTest.returnDealerScore() && pokerTest.returnDealerScore() <= 800);
     }
-
-
 }
 
