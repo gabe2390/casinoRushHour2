@@ -25,18 +25,25 @@ public class RussianRouletteTest {
     @Before
     public void createPlayerWithNegativeBalance(){
         player= new Player("Gabe");
+        player.addToBank(-6000);
         System.out.println(player.getBank());
     }
 
+    /**
+     * Self explanatory
+     */
     @Before
     public void instantiateRussianRoulette(){
         gun = new Gun(player);
         game=new RussianRoulette(gun);
     }
 
+    /**
+     * The gun has not been spun yet, and the check winner just checks if the the gun.shoot() method returns a bullet (true)
+     * Given that the gun has not been spun, checkForWinner() should return true;
+     */
     @Test
     public void testCheckForWinner(){
         assertTrue("If the chamber has not been spun, should return true", game.checkForWinner());
   }
-
 }
