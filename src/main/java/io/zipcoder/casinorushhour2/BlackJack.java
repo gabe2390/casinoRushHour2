@@ -230,7 +230,7 @@ public class BlackJack implements CardGame {
         }
     }
     /**
-     * Pause the flow of the game for 2 seconds to add to "realism"
+     * Pause the flow of the game for 1.5 seconds to add to "realism"
      */
     public void waitForDealerHit() {
         long currentTime = System.nanoTime();

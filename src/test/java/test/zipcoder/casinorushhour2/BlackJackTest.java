@@ -80,36 +80,36 @@ public class BlackJackTest {
     public void testGiveCardsBack(){
         testHand2.add(deck.getCards().remove(0));
         testHand2.add(deck.getCards().remove(0));
-        assertEquals(true,blackJackTest.giveCardsBack(testHand2));
+        assertEquals("Should put cards back in deck to return true", true,blackJackTest.giveCardsBack(testHand2));
     }
 
    @Test
     public void testAskToBet(){
         int betTest = blackJackTest.askToBet(key);
-        assertEquals(100, betTest);
+        assertEquals("Should return 100 for the bet value", 100, betTest);
     }
 
     @Test
     public void testAdjustAceTotalWithAce(){
-        assertEquals(21,blackJackTest.adjustAceTotal(playerHand));
+        assertEquals("Should add 10 to the raw score of 11 to return 21", 21,blackJackTest.adjustAceTotal(playerHand));
     }
 
     @Test
     public void testAdjustAceTotalWithoutAce(){
-        assertEquals(12,blackJackTest.adjustAceTotal(testHand));
+        assertEquals("Should check for Ace and then return raw score of 12", 12,blackJackTest.adjustAceTotal(testHand));
     }
 
     @Test
     public void testAskForHitYES(){
         blackJackTest.dealCards();
-        assertEquals(true, blackJackTest.askForHit(key2));
+        assertEquals("Should return true when asked if you would like to hit.",true, blackJackTest.askForHit(key2));
 
     }
 
     @Test
     public void testAskForHitNO(){
 
-        assertEquals(false, blackJackTest.askForHit(key3));
+        assertEquals("Should return false when asked if you want to hit.",false, blackJackTest.askForHit(key3));
     }
 
 
