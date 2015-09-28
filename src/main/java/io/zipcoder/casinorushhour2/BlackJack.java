@@ -43,13 +43,18 @@ public class BlackJack implements CardGame {
                 wantToHit= askForHit(key);
             }
 
-
             //where i stopped -Gabe
+
+            if(evaluatePoints(hands.get(player.getName())) < 11 && handContainsAce(hands.get(player.getName()))){
+                totalPoints = alternateAcePoints(evaluatePoints(hands.get(player.getName())));
+            }
+
+            System.out.println(totalPoints);
 
             if (evaluatePoints(hands.get(player.getName())) > 21) {
                 System.out.println("Your cards: " + hands.get(player.getName()) + " BUST! with " + evaluatePoints(hands.get(player.getName())) + " points.");
             } else {
-                System.out.println("Your cards: " + hands.get(player.getName()) + " You have " + evaluatePoints(hands.get(player.getName())) + " points.");
+                System.out.println("Your cards: " + hands.get(player.getName()) + " You have " + totalPoints + " points.");
             }
 
             System.out.println("Dealer has " + DEALER.getHand());
@@ -106,6 +111,11 @@ public class BlackJack implements CardGame {
 
 
     public boolean checkForWinner() {
+
+        if (evaluatePoints(hands.get(player.getName())) > 21) {
+            System.out.println("Your cards: " + hands.get(player.getName()) + " BUST! with " + evaluatePoints(hands.get(player.getName())) + " points.");
+            return false;
+        }
         if ((evaluatePoints(DEALER.getHand()) > evaluatePoints(hands.get(player.getName())) && evaluatePoints(DEALER.getHand()) <= 21) || (evaluatePoints(hands.get(player.getName())) > 21)) {
             System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
             return true;
@@ -235,14 +245,14 @@ public class BlackJack implements CardGame {
      * @param key
      * @return boolean
      */
-    private boolean askForHit(Scanner key) {
+    private boolean askForHit(Scanner key)  {
         System.out.println("Would you like to hit?");
-
 
         if (key.nextLine().equalsIgnoreCase("Y")) {
             List<Card> newHand = hands.get(player.getName());
             newHand.addAll(DEALER.dealCards(1, deck));
             hands.put(player.getName(), newHand);
+            printPoints(hands.get(player.getName()));
             return true;
         }
         return false;
