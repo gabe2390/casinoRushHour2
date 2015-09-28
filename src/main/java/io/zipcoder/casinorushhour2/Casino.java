@@ -15,7 +15,7 @@ public class Casino {
     private FiveCardDraw fiveDraw;
     private SevenCardStud sevenStud;
     private SevenCardDraw sevenDraw;
-    //private RussianDraw russianDraw;
+    private RussianDraw russianDraw;
     private Player player;
 
 
@@ -102,10 +102,10 @@ public class Casino {
                 russianRoulette.playGame();
                 break;
             }
-            /*case RussianDraw:{
+            case RussianDraw:{
                 russianDraw = new RussianDraw(new Gun(player));
                 russianDraw.playGame();
-            }*/
+            }
             case Leave_Casino: {
                 if (player.getBank() < 0) {
                     russianRoulette = new RussianRoulette(new Gun(player));
