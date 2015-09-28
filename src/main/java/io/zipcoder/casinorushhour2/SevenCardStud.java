@@ -382,7 +382,7 @@ public class SevenCardStud implements CardGame {
          * Compares the enum to an int skill then generates and compares to Dealer
          */
 
-        public void checkForWinner() {
+        public boolean checkForWinner() {
 
             if (returnPlayerScore((ArrayList<Card>) playerHand) >= returnDealerScore()) {
                 System.out.println("\n" + "How quaint. Looks like you won this round." + "\n");
@@ -390,6 +390,7 @@ public class SevenCardStud implements CardGame {
             } else {
                 System.out.println("\n" + "What a terrible shame. Looks like you lose." + "\n");
             }
+            return false;
 
 
 

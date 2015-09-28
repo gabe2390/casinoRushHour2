@@ -1,7 +1,5 @@
 package io.zipcoder.casinorushhour2;
 
-import com.sun.tools.internal.ws.wsdl.document.Kinds;
-
 import java.util.*;
 
 import static io.zipcoder.casinorushhour2.GameState.*;
@@ -18,7 +16,6 @@ public class Poker implements CardGame {
 
     int pot = 0;
 
-
     /**
      * Numerical evaluation of poker hands
      */
@@ -32,7 +29,6 @@ public class Poker implements CardGame {
     static int twoPair = 200;
     static int onePair = 100;
     static int noRankedHand = 0;
-
 
     /**
      * This is the constructor of the Poker game
@@ -66,26 +62,23 @@ public class Poker implements CardGame {
 
             DEALER.shuffleDeck(pokerDeck);
             DEALER.shuffleDeck(pokerDeck);
-            System.out.println(pokerDeck.getCards().size());
+
 
             playerHand.addAll(DEALER.dealCards(5, pokerDeck));
-            DEALER.addToHand(DEALER.dealCards(5, pokerDeck));
 
             printCards(playerHand);
-            printCards(DEALER.hand);
 
             pot = askToBet(key);
 
-
             if (checkForWinner()) {
-                player.addToBank(pot);
+                player.addToBank(pot * 2);
                 System.out.println("\n" + "Well now, look at that. You won!" + "\n");
             } else {
                 System.out.println("\n" + "Sorry kiddo, you lost! Looks like you're all outta luck." + "\n");
             }
 
-            System.out.println(giveCardsBack(playerHand));
-            System.out.println(giveCardsBack(DEALER.hand));
+            giveCardsBack(playerHand);
+
             System.out.println("Do you want to play again?");
 
             if (!key.nextLine().equals("Y")) {
@@ -120,10 +113,6 @@ public class Poker implements CardGame {
                 "???????????????????????????????????????*#######################################" + "\n");
     }
 
-    public void dealCards(int i, List<Card> hand) {
-        playerHand.addAll(DEALER.dealCards(i, pokerDeck));
-    }
-
     /**
      * returns the cards in a hand to the deck
      *
@@ -138,10 +127,7 @@ public class Poker implements CardGame {
             pokerDeck.getCards().add(hand.remove(0));
         }
 
-        System.out.println("Card hand size after give back: " + hand.size());
-        System.out.println("Deck size after give back : " + pokerDeck.getCards().size());
-
-        return pokerDeck.getCards().size() == deckSize +handSize;
+        return pokerDeck.getCards().size() == deckSize + handSize;
     }
 
     /**
@@ -151,14 +137,21 @@ public class Poker implements CardGame {
      * @return int
      */
     private int askToBet(Scanner key) {
-        int bet;
+        int bet = 0;
 
         System.out.println("Your bank total is $" + player.getBank() + " dollars.");
         System.out.println("Please enter bet amount as an Integer:");
+        try {
+            bet = player.bet(Integer.parseInt(key.nextLine()));
+        } catch (Exception e) {
+            bet = 1000;
+            player.bet(bet);
 
-        bet = player.bet(Integer.parseInt(key.nextLine()));
+            System.out.println("What's that? A 1000? Whatever you say." + "\n");
 
-        System.out.println("Your bank is now at $" + player.getBank());
+
+        }
+        System.out.println("Your bank is now at $" + player.getBank() + "\n");
         return bet;
     }
 
@@ -174,7 +167,7 @@ public class Poker implements CardGame {
             }
         });
 
-        System.out.println(cards);
+        System.out.println(cards + "\n");
     }
 
     /**
@@ -321,7 +314,6 @@ public class Poker implements CardGame {
             System.out.println("The world needs its losers. I just never thought I'd be one.");
         }
 
-
         return x;
     }
 
@@ -332,9 +324,6 @@ public class Poker implements CardGame {
     public boolean checkForWinner() {
         return returnPlayerScore((ArrayList<Card>) playerHand) >= returnDealerScore();
     }
-
-
-    /////////////////////Where Code Runs/////////////////////////
 
     /**
      * Enum of the kinds of possible Poker Hands

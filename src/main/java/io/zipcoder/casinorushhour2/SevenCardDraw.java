@@ -11,20 +11,11 @@ import static io.zipcoder.casinorushhour2.GameState.RUNNING;
 public class SevenCardDraw implements CardGame {
 
     /**
-     * Enum of the kinds of possible Poker Hands
-     */
-    public enum Kinds {
-        PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
-    }
-
-    /**
      * Required fields to interact with the player
      */
 
     Player player = new Player("Evan");
-
     Deck pokerDeck = new Deck(player);
-
 
     public Player pokerPlayer;
 
@@ -57,12 +48,9 @@ public class SevenCardDraw implements CardGame {
     public SevenCardDraw(Deck deck) {
         pokerDeck = deck;
         pokerDeck.init();
+        pokerPlayer = pokerDeck.getPlayer();
         playerHand = new ArrayList<Card>();
 
-        pokerPlayer = pokerDeck.getPlayer();
-        DEALER.shuffleDeck(pokerDeck);
-
-        DEALER.shuffleDeck(pokerDeck);
 
 
     }
@@ -74,8 +62,13 @@ public class SevenCardDraw implements CardGame {
 
 
     public void playGame() {
-        currentState = RUNNING;
         Scanner key = new Scanner(System.in);
+
+        DEALER.shuffleDeck(pokerDeck);
+        DEALER.shuffleDeck(pokerDeck);
+
+        currentState = RUNNING;
+
         while (currentState == GameState.RUNNING)
 
         {
@@ -429,5 +422,11 @@ public class SevenCardDraw implements CardGame {
 
     /////////////////////Where Code Runs/////////////////////////
 
+    /**
+     * Enum of the kinds of possible Poker Hands
+     */
+    public enum Kinds {
+        PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
+    }
 
 }
