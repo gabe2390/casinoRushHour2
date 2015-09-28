@@ -93,13 +93,14 @@ public class BlackJack implements CardGame {
      * @return
      */
     public boolean checkForWinner() {
+        List<Card> playerHand = hands.get(player.getName());
 
-        System.out.println(player.getName() + "'s hand: " + hands.get(player.getName()) + ". " + adjustAceTotal(hands.get(player.getName())) + " points.");
-        if ((adjustAceTotal(DEALER.getHand()) > adjustAceTotal(hands.get(player.getName())) && adjustAceTotal(DEALER.getHand()) <= 21) || (adjustAceTotal(hands.get(player.getName())) > 21)) {
+        System.out.println(player.getName() + "'s hand: " + playerHand + ". " + adjustAceTotal(playerHand) + " points.");
+        if ((adjustAceTotal(DEALER.getHand()) > adjustAceTotal(playerHand) && adjustAceTotal(DEALER.getHand()) <= 21) || (adjustAceTotal(playerHand) > 21)) {
             System.out.println("DEALER WON! YOU LOST $" + currentPot + " :(\n");
             return true;
-        } else if ((adjustAceTotal(DEALER.getHand()) < adjustAceTotal(hands.get(player.getName())) && adjustAceTotal(hands.get(player.getName())) <= 21)
-                || adjustAceTotal((DEALER.getHand())) > 21 && adjustAceTotal(hands.get(player.getName())) <= 21) {
+        } else if ((adjustAceTotal(DEALER.getHand()) < adjustAceTotal(playerHand) && adjustAceTotal(playerHand) <= 21)
+                || adjustAceTotal((DEALER.getHand())) > 21 && adjustAceTotal(playerHand) <= 21) {
 
             player.addToBank(currentPot * 2);
             System.out.println(player.getName() + " WON $" + (currentPot * 2));
