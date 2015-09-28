@@ -182,10 +182,18 @@ public class FiveCardDraw implements CardGame {
 
     }
 
+    /**
+     * Deals a single card to the player
+     */
+
     public void dealACardToPlayer() {
         playerHand.addAll(DEALER.dealCards(1, pokerDeck));
 
     }
+
+    /**
+     * Exchange cards in hand for player
+     */
 
     public void takeCardsFromPlayer() {
         LinkedHashMap tempMap = new LinkedHashMap();
@@ -224,7 +232,7 @@ public class FiveCardDraw implements CardGame {
     }
 
     /**
-     *
+     * Ask how much player wishes to wager
      */
 
     public void promptPlayerToBet() {
@@ -251,19 +259,6 @@ public class FiveCardDraw implements CardGame {
             pot = x;
         }
 
-    }
-
-
-    /**
-     * Changes the GameState to the opposite of it's current state
-     */
-
-    public void changeGameState() {
-        if (state == NOTRUNNING) {
-            currentState = RUNNING;
-        } else {
-            currentState = NOTRUNNING;
-        }
     }
 
 
@@ -405,6 +400,12 @@ public class FiveCardDraw implements CardGame {
 
     }
 
+    /**
+     * Returns a generated int corresponding to a possible poker hand
+     *
+     * @return
+     */
+
     public int returnDealerScore() {
         Random ran = new Random();
         int x = (ran.nextInt(1) + 1) * 100 + (ran.nextInt(1) - 1) * 100;
@@ -437,9 +438,6 @@ public class FiveCardDraw implements CardGame {
 
         return true;
     }
-
-
-    /////////////////////Where Code Runs/////////////////////////
 
 
 }

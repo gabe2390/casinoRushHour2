@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static io.zipcoder.casinorushhour2.Poker.*;
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -26,6 +28,7 @@ public class PokerTest {
     Deck deckTest;
     Poker pokerTest;
     ArrayList<Card> playerHand = new ArrayList<Card>();
+
 
 
     @Before
@@ -76,7 +79,7 @@ public class PokerTest {
 
     @Test
     public void givenHandShouldReturnEnum() {
-        //assertEquals("Should return no flush", Kinds.NOFLUSH, pokerTest.checkForFlushCards(playerHand));
+        assertEquals("Should return no flush", Poker.Kinds.NOFLUSH, pokerTest.checkForFlushCards(playerHand));
     }
 
     /**
@@ -85,7 +88,16 @@ public class PokerTest {
 
     @Test
     public void givenASortedMapShouldReturn() {
-       // assertEquals("Should return a pair", Poker.Kinds.PAIR, pokerTest.InterpretSimilarCardsToPokerHand(pokerTest.checkForSimilarNamedCards(playerHand)));
+        assertEquals("Should return a pair", Poker.Kinds.PAIR, pokerTest.InterpretSimilarCardsToPokerHand(pokerTest.checkForSimilarNamedCards(playerHand)));
+    }
+
+    /**
+     *  Test should return a integer equal to the evaluated poker card combination in a player's hand
+     */
+
+    @Test
+    public void givenAPlayerHandShouldReturnCardComboInteger() {
+        assertEquals("Should return 100", 100, pokerTest.returnPlayerScore(playerHand));
     }
 
     /**
@@ -95,6 +107,11 @@ public class PokerTest {
     @Test
     public void shouldReturnARandomInt() {
         assertTrue("Random number is within 0 and 800" + pokerTest.returnDealerScore(), 0 <= pokerTest.returnDealerScore() && pokerTest.returnDealerScore() <= 800);
+    }
+
+    @Test
+    public void shouldReturnABoolean() {
+        assertTrue("Should return false", pokerTest.checkForWinner());
     }
 
 

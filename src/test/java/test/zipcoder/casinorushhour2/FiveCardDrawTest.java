@@ -21,7 +21,7 @@ public class FiveCardDrawTest {
 
     Player playerTest;
     Deck deckTest;
-    Poker pokerTest;
+    FiveCardDraw pokerTest;
     ArrayList<Card> playerHand = new ArrayList<Card>();
 
 
@@ -29,7 +29,7 @@ public class FiveCardDrawTest {
     public void staging() {
         playerTest = new Player("test");
         deckTest = new Deck(playerTest);
-        pokerTest = new Poker(deckTest);
+        pokerTest = new FiveCardDraw(deckTest);
 
 
         Card firstCard = new Card();
@@ -73,7 +73,7 @@ public class FiveCardDrawTest {
 
     @Test
     public void givenHandShouldReturnEnum() {
-        //assertEquals("Should return no flush", Kinds.NOFLUSH, pokerTest.checkForFlushCards(playerHand));
+        assertEquals("Should return no flush", FiveCardDraw.Kinds.NOFLUSH, pokerTest.checkForFlushCards(playerHand));
     }
 
     /**
@@ -82,7 +82,7 @@ public class FiveCardDrawTest {
 
     @Test
     public void givenASortedMapShouldReturn() {
-        // assertEquals("Should return a pair", Poker.Kinds.PAIR, pokerTest.InterpretSimilarCardsToPokerHand(pokerTest.checkForSimilarNamedCards(playerHand)));
+         assertEquals("Should return a pair", FiveCardDraw.Kinds.PAIR, pokerTest.InterpretSimilarCardsToPokerHand(pokerTest.checkForSimilarNamedCards(playerHand)));
     }
 
     /**
@@ -94,6 +94,19 @@ public class FiveCardDrawTest {
         assertTrue("Random number is within 0 and 800" + pokerTest.returnDealerScore(), 0 <= pokerTest.returnDealerScore() && pokerTest.returnDealerScore() <= 800);
     }
 
+    @Test
+    public void shouldReturnNumericValueOfPlayerHand() {
+        assertEquals("Should return 100", 100, pokerTest.returnPlayerScore(playerHand));
+    }
+
+    /**
+     * Test should return a boolean to confirm execution
+     */
+
+    @Test
+    public void shouldReturnBoolean() {
+        assertTrue("Should return true", true);
+    }
 
 
 }

@@ -11,11 +11,20 @@ import static io.zipcoder.casinorushhour2.GameState.RUNNING;
 public class SevenCardDraw implements CardGame {
 
     /**
+     * Enum of the kinds of possible Poker Hands
+     */
+    public enum Kinds {
+        PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
+    }
+
+    /**
      * Required fields to interact with the player
      */
 
     Player player = new Player("Evan");
+
     Deck pokerDeck = new Deck(player);
+
 
     public Player pokerPlayer;
 
@@ -48,9 +57,12 @@ public class SevenCardDraw implements CardGame {
     public SevenCardDraw(Deck deck) {
         pokerDeck = deck;
         pokerDeck.init();
-        pokerPlayer = pokerDeck.getPlayer();
         playerHand = new ArrayList<Card>();
 
+        pokerPlayer = pokerDeck.getPlayer();
+
+        DEALER.shuffleDeck(pokerDeck);
+        DEALER.shuffleDeck(pokerDeck);
 
 
     }
@@ -58,17 +70,13 @@ public class SevenCardDraw implements CardGame {
 
     /**
      * Changes game state to running
+     * Executes all of the game methods
      */
 
 
     public void playGame() {
-        Scanner key = new Scanner(System.in);
-
-        DEALER.shuffleDeck(pokerDeck);
-        DEALER.shuffleDeck(pokerDeck);
-
         currentState = RUNNING;
-
+        Scanner key = new Scanner(System.in);
         while (currentState == GameState.RUNNING)
 
         {
@@ -163,10 +171,18 @@ public class SevenCardDraw implements CardGame {
 
     }
 
+    /**
+     * Deals a single card to the player
+     */
+
     public void dealACardToPlayer() {
         playerHand.addAll(DEALER.dealCards(1, pokerDeck));
 
     }
+
+    /**
+     * Ask user what cards they want to exchange from their hand
+     */
 
     public void takeCardsFromPlayer() {
         LinkedHashMap tempMap = new LinkedHashMap();
@@ -205,7 +221,7 @@ public class SevenCardDraw implements CardGame {
     }
 
     /**
-     *
+     * Asks player the amount the wish to wager
      */
 
     public void promptPlayerToBet() {
@@ -232,19 +248,6 @@ public class SevenCardDraw implements CardGame {
             pot = x;
         }
 
-    }
-
-
-    /**
-     * Changes the GameState to the opposite of it's current state
-     */
-
-    public void changeGameState() {
-        if (state == NOTRUNNING) {
-            currentState = RUNNING;
-        } else {
-            currentState = NOTRUNNING;
-        }
     }
 
 
@@ -364,7 +367,7 @@ public class SevenCardDraw implements CardGame {
      */
 
     public int returnPlayerScore(ArrayList<Card> hand) {
-        if (checkForFlushCards(hand) == Kinds.FLUSH) {
+        if (checkForFlushCards(hand) == SevenCardDraw.Kinds.FLUSH) {
             return flush;
         } else if (InterpretSimilarCardsToPokerHand(checkForSimilarNamedCards(hand)) == Kinds.FOURKINDS) {
             return fourOfAKind;
@@ -417,16 +420,6 @@ public class SevenCardDraw implements CardGame {
         }
 
         return true;
-    }
-
-
-    /////////////////////Where Code Runs/////////////////////////
-
-    /**
-     * Enum of the kinds of possible Poker Hands
-     */
-    public enum Kinds {
-        PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
     }
 
 }

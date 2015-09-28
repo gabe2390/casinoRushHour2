@@ -93,6 +93,12 @@ public class SevenCardStudTest {
         assertTrue("Random number is within 0 and 800" + pokerTest.returnDealerScore(), 0 <= pokerTest.returnDealerScore() && pokerTest.returnDealerScore() <= 800);
     }
 
-
+    /**
+     * Returns boolean to confirm execution
+     */
+    @Test
+    public void shouldReturnABoolean() {
+        assertTrue("Should return true", pokerTest.checkForWinner());
+    }
 
 }

@@ -2,7 +2,7 @@ package io.zipcoder.casinorushhour2;
 
 import java.util.*;
 
-import static io.zipcoder.casinorushhour2.GameState.*;
+import static io.zipcoder.casinorushhour2.GameState.NOTRUNNING;
 
 /**
  * Created by emaron on 9/24/15.
@@ -43,6 +43,7 @@ public class Poker implements CardGame {
 
     /**
      * Changes game state to running
+     * Executes relevant game methods
      */
 
 
@@ -328,7 +329,7 @@ public class Poker implements CardGame {
     /**
      * Enum of the kinds of possible Poker Hands
      */
-    enum Kinds {
+    public enum Kinds {
         PAIR, THREEKINDS, FOURKINDS, TWOPAIRS, FULLHOUSE, STRAIGHT, FLUSH, NOFLUSH, NOGOODCARDS
     }
 
