@@ -117,7 +117,9 @@ public class RussianRoulette implements Game {
     public void printPicture() {
         String gun = "                                                                                                                                                                                \n" +
 
-                "                                                          @ ;@@@: @                                                                                                                  ;@@@: @+@          \n" +
+
+
+        "                                                          @ ;@@@: @                                                                                                                  ;@@@: @+@          \n" +
                 "                                                         @@ ;,#@: @#,                                                                                                             +  @,#@:@@@:'@        \n" +
                 "                                                          @.;@#@  `#, @ ,: @                   @                                                                                @ +@   #@ @`@@ @        \n" +
                 "                                                          #. @@.:@@#';@#'@+@':@@.;@#@ ,@@@@`#@            : @.;'       :+ @            ;@         @'                @       '     @@   @@:              \n" +

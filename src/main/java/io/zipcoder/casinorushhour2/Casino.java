@@ -179,7 +179,7 @@ public class Casino {
                 x = Integer.parseInt(s.nextLine());
             } catch (Exception e) {
                 System.out.println("Since you didn't heed my warning, you're going to play Russian Roulette!\n");
-                x = 3;
+                x = 6;
             }
             casino.setCurrentGame(x);
             casino.enterGame(casino.getCurrentGame());
