@@ -6,17 +6,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
+/**This is a Blackjack game for our Casino
  * Created by ghumphrey on 9/24/15.
  */
 public class BlackJack implements CardGame {
 
+    //declaring fields
     GameState state = GameState.NOTRUNNING;
     Player player;
     Deck deck;
     Map<String, List<Card>> hands;
     int currentPot;
 
+    /**
+     * Blackjack game constructor
+     * @param deck
+     */
     public BlackJack(Deck deck) {
         this.deck = deck;
         deck.init();
@@ -25,52 +30,49 @@ public class BlackJack implements CardGame {
         hands = new HashMap<String, List<Card>>();
     }
 
+    /**
+     * Starts the game loop(s)
+     */
     public void playGame() {
         Scanner key = new Scanner(System.in);
         boolean wantToHit = true;
         state = GameState.RUNNING;
-
-
+        //game loop
         while (state == GameState.RUNNING) {
-
+            //takes bet, deals cards
             currentPot = askToBet(key);
             dealCards();
 
             //player hit loop
             while (wantToHit && adjustAceTotal(hands.get(player.getName())) < 21) {
-                wantToHit= askForHit(key);
+                wantToHit = askForHit(key);
                 printPoints(hands.get(player.getName()));
             }
 
             //Prints current Dealer total
             dealerPrintPoints(DEALER.getHand());
 
-            /**
-             * Dealer HIT loop.
-             */
+            //DEALER hit loop.
             while (adjustAceTotal(DEALER.getHand()) <= adjustAceTotal(hands.get(player.getName())) && adjustAceTotal(hands.get(player.getName())) <= 21) {
                 System.out.println("DEALER HIT!!!!\n");
                 DEALER.addToHand(DEALER.dealCards(1, deck));
-               dealerPrintPoints(DEALER.getHand());
+                dealerPrintPoints(DEALER.getHand());
             }
 
+            //compares totals, outputs new bank value
             checkForWinner();
             System.out.println("Your bank is now " + player.getBank());
             state = GameState.NOTRUNNING;
         }
 
-
+        //Asks if you would like to play again
+        //Resets the hands and deck if you say yes
         System.out.println("Do you want to play again?");
-
-
         if (key.nextLine().equalsIgnoreCase("Y")) {
-
             giveCardsBack(DEALER.getHand());
             giveCardsBack(hands.get(player.getName()));
-
             DEALER.getHand().clear();
             hands.get(player.getName()).clear();
-
             playGame();
         } else {
             System.out.println("Thanks for playing Black Jack, come again soon and give me all of your money!");
@@ -78,17 +80,20 @@ public class BlackJack implements CardGame {
     }
 
     public void changeGameState() {
-
     }
 
     public void exitGame() {
-
     }
 
-
+    /**
+     * Compares scores and outputs the winner.
+     * Updates the bank total.
+     *
+     * @return
+     */
     public boolean checkForWinner() {
 
-        System.out.println(player.getName() + "'s hand: " + hands.get(player.getName())+ ". " + adjustAceTotal(hands.get(player.getName())) + " points.");
+        System.out.println(player.getName() + "'s hand: " + hands.get(player.getName()) + ". " + adjustAceTotal(hands.get(player.getName())) + " points.");
         if ((adjustAceTotal(DEALER.getHand()) > adjustAceTotal(hands.get(player.getName())) && adjustAceTotal(DEALER.getHand()) <= 21) || (adjustAceTotal(hands.get(player.getName())) > 21)) {
             System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
             return true;
@@ -99,16 +104,18 @@ public class BlackJack implements CardGame {
             System.out.println(player.getName() + " WON " + (currentPot * 2));
         } else {
             player.addToBank(currentPot);
-            System.out.println("It was a tie! Here's your money back... scrub.");
+            System.out.println("It was a tie! Here's your money back...");
         }
         currentPot = 0;
         return false;
     }
 
+    /**
+     * Sets the point values for each card in the deck
+     * @param deck
+     */
     public void setAllCardPoints(Deck deck) {
         for (int i = 0; i < deck.getCards().size(); i++) {
-
-
             if (deck.getCards().get(i).getName().equals("Ace")) {
                 deck.getCards().get(i).setValue(1);
             } else if (deck.getCards().get(i).getName().equals("Jack") || deck.getCards().get(i).getName().equals("Queen") || deck.getCards().get(i).getName().equals("King")) {
@@ -120,15 +127,26 @@ public class BlackJack implements CardGame {
 
     }
 
+    /**
+     * Calculates raw score (Ace = 1 here)
+     *
+     * @param hand
+     * @return Score
+     */
     public int evaluatePoints(List<Card> hand) {
         int points = 0;
-
         for (int i = 0; i < hand.size(); i++) {
             points += hand.get(i).getValue();
         }
         return points;
     }
 
+    /**
+     * Checks for a hand less than 12, increases total by 10 if true
+     *
+     * @param i your raw score
+     * @return increased score
+     */
     private int alternateAcePoints(int i) {
         if (i <= 11) {
             return i + 10;
@@ -137,7 +155,12 @@ public class BlackJack implements CardGame {
         }
     }
 
-
+    /**
+     * Puts cards back into the deck
+     *
+     * @param hand
+     * @return
+     */
     public boolean giveCardsBack(List<Card> hand) {
         int i = deck.getCards().size();
         deck.getCards().addAll(hand);
@@ -153,11 +176,10 @@ public class BlackJack implements CardGame {
      * asks player to bet, removes the betting amount specified, and then returns that amount to be added to the current pot
      *
      * @param key
-     * @return
+     * @return bet
      */
     private int askToBet(Scanner key) {
         int bet;
-
         System.out.println("Your bank total is $" + player.getBank() + " dollars. ");
         System.out.println("Please enter bet amount as an Integer:");
         bet = player.bet(Integer.parseInt(key.nextLine()));
@@ -175,19 +197,9 @@ public class BlackJack implements CardGame {
         DEALER.addToHand(DEALER.dealCards(2, deck));
 
         for (String name : hands.keySet()) {
-            if (adjustAceTotal(hands.get(name)) != evaluatePoints(hands.get(name))) {
-
-
-                System.out.println("Name: " + name + ".\nHand: " + hands.get(name) + "\nYou have " +evaluatePoints(hands.get(name)) + " or " + adjustAceTotal(hands.get(name)) + " points.");
-            }
-            else{
-                System.out.println("Name: " + name + ".\nHand: " + hands.get(name) + "\nYou have " + adjustAceTotal(hands.get(name)) + " points.");
-            }
+            printPoints(hands.get(name));
         }
-
-
         System.out.println("Dealer's hand: " + DEALER.getHand().get(0) + " face up, and one card face down");
-
     }
 
     /**
@@ -197,28 +209,33 @@ public class BlackJack implements CardGame {
      */
     private void printPoints(List<Card> cards) {
         if (handContainsAce(cards) && evaluatePoints(cards) <= 11) {
-            System.out.println("Your cards: " + cards + " \nYou have " + evaluatePoints(cards)
+            System.out.println("Your cards: " + cards + " You have " + evaluatePoints(cards)
                     + " or " + alternateAcePoints(evaluatePoints(cards)) + " points.");
-        }
-        else if (evaluatePoints(cards) > 21) {
-            System.out.println("Your cards: " + cards + " \nBUST! with " + evaluatePoints(cards) + " points.");
-        }
-        else {
-            System.out.println("Your cards: " + cards + " \nYou have " + evaluatePoints(cards) + " points.");
+        } else if (evaluatePoints(cards) > 21) {
+            System.out.println("Your cards: " + cards + " BUST! with " + evaluatePoints(cards) + " points.");
+        } else {
+            System.out.println("Your cards: " + cards + " You have " + evaluatePoints(cards) + " points.");
         }
     }
 
-    private void dealerPrintPoints(List<Card> cards){
-        if(evaluatePoints(cards) != adjustAceTotal(cards)){
-            System.out.println("Dealer cards: " + cards + " Dealer has " + evaluatePoints(cards) + " or " + adjustAceTotal(cards)+".");
+    /**
+     * Prints the total of the Dealer's hand
+     *
+     * @param cards
+     */
+    private void dealerPrintPoints(List<Card> cards) {
+        if (evaluatePoints(cards) != adjustAceTotal(cards)) {
+            System.out.println("Dealer cards: " + cards + " Dealer has " + evaluatePoints(cards) + " or " + adjustAceTotal(cards) + ".");
+        } else {
+            System.out.println("Dealer cards: " + cards + " Dealer has " + adjustAceTotal(cards) + ".");
         }
-        else{System.out.println("Dealer cards: " + cards + " Dealer has " + adjustAceTotal(cards)+".");}
     }
+
     /**
      * returns true if a player's hand contains an Ace
      *
      * @param cards
-     * @return
+     * @return true if contains Ace
      */
     private boolean handContainsAce(List<Card> cards) {
         boolean hasAce = false;
@@ -230,11 +247,17 @@ public class BlackJack implements CardGame {
         return hasAce;
     }
 
-    private int adjustAceTotal(List<Card> cards){
-        if (handContainsAce(cards)&& alternateAcePoints(evaluatePoints(cards))<=21){
+
+    /**
+     * Changes Ace from 11 to 1 if you go over 21
+     *
+     * @param cards hand
+     * @return total points
+     */
+    private int adjustAceTotal(List<Card> cards) {
+        if (handContainsAce(cards) && alternateAcePoints(evaluatePoints(cards)) <= 21) {
             return alternateAcePoints(evaluatePoints(cards));
-        }
-        else{
+        } else {
             return evaluatePoints(cards);
         }
     }
@@ -247,8 +270,6 @@ public class BlackJack implements CardGame {
      */
     private boolean askForHit(Scanner key) {
         System.out.println("Would you like to hit?");
-
-
         if (key.nextLine().equalsIgnoreCase("Y")) {
             List<Card> newHand = hands.get(player.getName());
             newHand.addAll(DEALER.dealCards(1, deck));
