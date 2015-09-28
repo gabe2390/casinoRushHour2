@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Created by ghumphrey on 9/25/15.
+ * This is the test class for the methods in the RussianRoulette class
  */
 public class RussianRouletteTest {
 
