@@ -34,7 +34,7 @@ public class Player {
      */
     public int bet(int b){
         if(b<1){
-            System.out.println("Not a valid bet, nice try jerk. Multiplied by -1! Your bet is " + -b);
+            System.out.println("Not a valid bet, nice try jerk. Multiplied by -1! Your bet is $" + -b);
             bank -= -b;
             return -b;
         }

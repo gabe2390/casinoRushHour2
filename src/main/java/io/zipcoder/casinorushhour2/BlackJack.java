@@ -45,6 +45,7 @@ public class BlackJack implements CardGame {
 
             //player hit loop
             while (wantToHit && adjustAceTotal(hands.get(player.getName())) < 21) {
+
                 wantToHit = askForHit(key);
                 printPoints(hands.get(player.getName()));
             }
@@ -61,7 +62,7 @@ public class BlackJack implements CardGame {
 
             //compares totals, outputs new bank value
             checkForWinner();
-            System.out.println("Your bank is now " + player.getBank());
+            System.out.println("Your bank is now $" + player.getBank());
             state = GameState.NOTRUNNING;
         }
 
@@ -95,13 +96,13 @@ public class BlackJack implements CardGame {
 
         System.out.println(player.getName() + "'s hand: " + hands.get(player.getName()) + ". " + adjustAceTotal(hands.get(player.getName())) + " points.");
         if ((adjustAceTotal(DEALER.getHand()) > adjustAceTotal(hands.get(player.getName())) && adjustAceTotal(DEALER.getHand()) <= 21) || (adjustAceTotal(hands.get(player.getName())) > 21)) {
-            System.out.println("DEALER WON! YOU LOST " + currentPot + " DOLLARS\n");
+            System.out.println("DEALER WON! YOU LOST $" + currentPot + " :(\n");
             return true;
         } else if ((adjustAceTotal(DEALER.getHand()) < adjustAceTotal(hands.get(player.getName())) && adjustAceTotal(hands.get(player.getName())) <= 21)
                 || adjustAceTotal((DEALER.getHand())) > 21 && adjustAceTotal(hands.get(player.getName())) <= 21) {
 
             player.addToBank(currentPot * 2);
-            System.out.println(player.getName() + " WON " + (currentPot * 2));
+            System.out.println(player.getName() + " WON $" + (currentPot * 2));
         } else {
             player.addToBank(currentPot);
             System.out.println("It was a tie! Here's your money back...");
@@ -180,8 +181,8 @@ public class BlackJack implements CardGame {
      */
     private int askToBet(Scanner key) {
         int bet;
-        System.out.println("Your bank total is $" + player.getBank() + " dollars. ");
-        System.out.println("Please enter bet amount as an Integer:");
+        System.out.println("Your bank total is $" + player.getBank() );
+        System.out.println("Please enter bet amount:");
         bet = player.bet(Integer.parseInt(key.nextLine()));
         System.out.println("Your bank is now at $" + player.getBank());
         return bet;
