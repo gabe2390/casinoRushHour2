@@ -3,7 +3,7 @@ package test.zipcoder.casinorushhour2;
 import io.zipcoder.casinorushhour2.*;
 import org.junit.Before;
 import org.junit.Test;
-
+import static org.mockito.Mockito.*;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -17,6 +17,12 @@ public class BlackJackTest {
     Deck deckTest;
     BlackJack blackJackTest;
     ArrayList<Card> playerHand = new ArrayList<Card>();
+    ArrayList<Card> testHand = new ArrayList<Card>();
+    ArrayList<Card> testHand2 = new ArrayList<Card>();
+    Scanner key = new Scanner("100");
+    Scanner key2 = new Scanner("y");
+    Scanner key3 = new Scanner("n");
+    Map<String, List<Card>> hands;
 
 
     @Before
@@ -27,29 +33,81 @@ public class BlackJackTest {
         DEALER = new Dealer();
         int currentPot = 0;
 
+
+
         Card firstCard = new Card();
         firstCard.setName("Ace");
         firstCard.setSuit(Suit.DIAMONDS);
+        firstCard.setValue(1);
         Card secondCard = new Card();
         secondCard.setName("King");
         secondCard.setSuit(Suit.HEARTS);
+        secondCard.setValue(10);
         Card thirdCard = new Card();
         thirdCard.setName("Four");
         thirdCard.setSuit(Suit.SPADES);
+        thirdCard.setValue(4);
         Card fourthCard = new Card();
         fourthCard.setName("Eight");
         fourthCard.setSuit(Suit.DIAMONDS);
+        fourthCard.setValue(8);
 
         playerHand.add(firstCard);
         playerHand.add(secondCard);
 
-        DEALER.addToHand(thirdCard);
-        DEALER.addToHand(fourthCard);
+        testHand.add(thirdCard);
+        testHand.add(fourthCard);
+
+
+    }
+        @Test
+    public void evaluatePoints(){
+            assertEquals("Returns raw total of hand", 11, blackJackTest.evaluatePoints(playerHand));
+
+}
+    @Test
+    public void testAlternateAcePointsAdd10(){
+        assertEquals("Should add 10 to your total (if amount entered was less than 12", 15, blackJackTest.alternateAcePoints(5));
     }
 
     @Test
-    public void testCheckForWinner(){
-       assertEquals(false, blackJackTest.checkForWinner());
+    public void testAlternateAcePointsKeepSame(){
+        assertEquals("Should add 10 to your total (if amount entered was less than 12", 15, blackJackTest.alternateAcePoints(15));
+    }
+
+    @Test
+    public void testGiveCardsBack(){
+        testHand2.add(deckTest.getCards().remove(0));
+        testHand2.add(deckTest.getCards().remove(0));
+        assertEquals(true,blackJackTest.giveCardsBack(testHand2));
+    }
+
+   @Test
+    public void testAskToBet(){
+        int betTest = blackJackTest.askToBet(key);
+        assertEquals(100, betTest);
+    }
+
+    @Test
+    public void testAdjustAceTotalWithAce(){
+        assertEquals(21,blackJackTest.adjustAceTotal(playerHand));
+    }
+
+    @Test
+    public void testAdjustAceTotalWithoutAce(){
+        assertEquals(12,blackJackTest.adjustAceTotal(testHand));
+    }
+
+    @Test
+    public void testAskForHitYES(){
+
+        assertEquals(true, blackJackTest.askForHit(key2));
+
+    }
+
+    @Test
+    public void testAskForHitNO(){
+        assertEquals(false, blackJackTest.askForHit(key3));
     }
 }
 
