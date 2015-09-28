@@ -28,8 +28,13 @@ public class RussianRoulette implements Game {
         state = GameState.RUNNING;
         Scanner key = new Scanner(System.in);
 
+        if (player.getBank() < 0) {
+            System.out.println("Look here ya broke bastard, you owe " + (-player.getBank()));
+        } else {
+            System.out.println("So, you wanted to be a jerk!");
+        }
+        System.out.println("Now, take this gun, and shoot at yourself!");
 
-        System.out.println("Look here ya broke bastard, you owe " + (-player.getBank()) + ". So here take this gun, and shoot at yourself!");
         printPicture();
 
         while (state == GameState.RUNNING) {
@@ -47,6 +52,7 @@ public class RussianRoulette implements Game {
                 System.out.println("BANG!!!!!!!");
                 System.out.println("How unlucky are we? You just killed yourself. Better luck next life!");
                 state = GameState.NOTRUNNING;
+                System.exit(0);
             } else {
                 player.addToBank(1000 * count);
 

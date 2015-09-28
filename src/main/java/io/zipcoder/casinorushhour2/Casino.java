@@ -11,40 +11,57 @@ public class Casino {
     private GameSelection currentGame;
     private RussianRoulette russian;
     private BlackJack blackJack;
-    private Player player;
-    private Poker poker;
+    /* private Poker poker;
+     private FiveCardDraw fiveDraw;
+     private SevenCardStud sevenStud;
+     private SevenCardDraw sevenDraw;
+   */  private Player player;
+
 
     public Casino() {
-        Scanner key = new Scanner(System.in);
-        String name;
-
-        printSkull();
-
-        System.out.println("Welcome to Killer Kasino!!!! What is yo name FOO!");
-        name = key.nextLine();
-
-        player = new Player(name);
-        player.addToBank(-5000);
     }
 
-    public void setCurrentGame(String userInput) {
-        switch (Integer.parseInt(userInput)) {
-            case 1:
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setCurrentGame(int userInput) {
+        switch (userInput) {
+            case 1: {
                 currentGame = GameSelection.Blackjack;
                 break;
-            case 2:
+            }
+            case 2: {
                 currentGame = GameSelection.Poker;
                 break;
-            case 3:
+            }
+            case 3: {
+                currentGame = GameSelection.FiveCardDraw;
+                break;
+            }
+            case 4: {
+                currentGame = GameSelection.SevenCardStud;
+                break;
+            }
+            case 5: {
+                currentGame = GameSelection.SevenCardDraw;
+                break;
+            }
+            case 6: {
                 currentGame = GameSelection.Russian_Roulette;
                 break;
-            case 4:
+            }
+            case 7: {
                 currentGame = GameSelection.Leave_Casino;
                 break;
+            }
             default:
-                System.out.println("Unknown User input: " + userInput);
+                currentGame = GameSelection.Russian_Roulette;
         }
-        enterGame(getCurrentGame());
     }
 
     public void enterGame(GameSelection game) {
@@ -54,9 +71,30 @@ public class Casino {
                 blackJack.playGame();
                 break;
             }
-            case Poker: {
+        /*    case Poker: {
                 poker = new Poker(new Deck(player));
                 poker.playGame();
+                break;
+            }
+           case FiveCardDraw: {
+                fiveDraw = new FiveCardDraw(new Deck(player));
+                fiveDraw.playGame();
+                break;
+            }
+            case SevenCardStud: {
+                sevenStud = new SevenCardStud(new Deck(player));
+                sevenStud.playGame();
+                break;
+            }
+            case SevenCardDraw: {
+                sevenDraw = new SevenCardDraw(new Deck(player));
+                sevenDraw.playGame();
+                break;
+            }
+*/
+            case Russian_Roulette: {
+                russian = new RussianRoulette(new Gun(player));
+                russian.playGame();
                 break;
             }
             case Leave_Casino: {
@@ -65,9 +103,6 @@ public class Casino {
                     russian.playGame();
                     break;
                 }
-            }
-            default: {
-                System.out.println("You didn't pick a valid choice. Choose again");
             }
         }
     }
@@ -125,45 +160,32 @@ public class Casino {
         System.out.println(graphics);
     }
 
-    /*
-    public Poker getPoker() {
-        return poker;
-    }
-
-    public void setPoker(Poker poker) {
-        this.poker = poker;
-    }
-
-    public RussianRoulette getRussianRoulette() {
-        return russianRoulette;
-    }
-
-    public void setRussianRoulette(RussianRoulette russianRoulette) {
-        this.russianRoulette = russianRoulette;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    } */
-
     public static void main(String[] args) {
 
-        Casino killer = new Casino();
+        Casino casino = new Casino();
+        casino.printSkull();
+        System.out.println("Welcome to the Killer Kasino!!! What's yo name FOO!!!!!");
+
         Scanner s = new Scanner(System.in);
+        casino.setPlayer(new Player(s.nextLine()));
+
+        int x = 0;
 
         do {
+            System.out.println("Select a game:\n1 for Blackjack\n2 for 5 Card Stud\n3 for 5 Card Draw\n4 for 7 Card Stud\n5 for 7 Card Draw" +
+                    "\n6 for Russian Roulette\n7 for Leave Casino.\nI would " +
+                    "advise against entering any other character besides the ones listed.");
+            try {
+                x = Integer.parseInt(s.nextLine());
+            } catch (Exception e) {
+                System.out.println("Since you didn't heed my warning, you're going to play Russian Roulette!\n");
+                x = 3;
+            }
+            casino.setCurrentGame(x);
+            casino.enterGame(casino.getCurrentGame());
+        } while (casino.getCurrentGame() != GameSelection.Leave_Casino);
 
-            System.out.println("Select a game:\n 1 for Blackjack\n 2 for Poker\n 3 for Russian Roulette \n 4 for Leave Casino");
-            String x = s.nextLine();
-            killer.setCurrentGame(x);
-
-        } while (killer.getCurrentGame() != GameSelection.Leave_Casino);
-
-        System.out.println("Thanks for playing");
+        System.out.println("Thanks for coming to Killer Kasino. Don't die out there!");
     }
 }
 
