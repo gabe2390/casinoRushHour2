@@ -28,13 +28,8 @@ public class RussianRoulette implements Game {
         state = GameState.RUNNING;
         Scanner key = new Scanner(System.in);
 
-        if (player.getBank() < 0) {
-            System.out.println("Look here ya broke bastard, you owe " + (-player.getBank()));
-        } else {
-            System.out.println("So, you wanted to be a jerk!");
-        }
-        System.out.println("Now, take this gun, and shoot at yourself!");
 
+        System.out.println("Look here ya broke bastard, you owe " + (-player.getBank()) + ". So here take this gun, and shoot at yourself!");
         printPicture();
 
         while (state == GameState.RUNNING) {
@@ -52,7 +47,6 @@ public class RussianRoulette implements Game {
                 System.out.println("BANG!!!!!!!");
                 System.out.println("How unlucky are we? You just killed yourself. Better luck next life!");
                 state = GameState.NOTRUNNING;
-                System.exit(0);
             } else {
                 player.addToBank(1000 * count);
 
@@ -62,7 +56,7 @@ public class RussianRoulette implements Game {
                     System.out.println("You still owe " + (-player.getBank()) + "\n");
                 } else {
                     System.out.println("Click!\nLucky bastard! You're free to go. You've got " + player.getBank() + "\n\n" +
-                            "However, if you want to earn a quick " + (1000 * (1 + count)) + ", you can play again");
+                            "However, if you want to earn a quick " + (1000 * (1+count)) + ", you can play again");
                     System.out.println("Do you want to play again? Enter 'Y' to play again or any other key to exit.");
 
                     //If player chooses to play again, re-enter the loop, else change GameState, thus ending the game loop, and the program
@@ -77,12 +71,8 @@ public class RussianRoulette implements Game {
         }
     }
 
-    public void changeGameState() {
-
-    }
-
     public void exitGame() {
-        state = GameState.NOTRUNNING;
+        state= GameState.NOTRUNNING;
     }
 
     /**
@@ -94,17 +84,6 @@ public class RussianRoulette implements Game {
         return gun.shoot();
     }
 
-    public static void main(String[] args) {
-        Player p = new Player("Gabe");
-        p.addToBank(-5000);
-        System.out.println(p == null);
-        System.out.println(p.getBank());
-
-        RussianRoulette r = new RussianRoulette(new Gun(p));
-
-        r.playGame();
-    }
-
     /**
      * Pause the flow of the game for 2 seconds to add to "realism"
      */
@@ -113,13 +92,10 @@ public class RussianRoulette implements Game {
         while ((System.nanoTime() - currentTime) <= 2000000000) {
         }
     }
+    public void printPicture(){
+        String gun= "                                                                                                                                                                                \n" +
 
-    public void printPicture() {
-        String gun = "                                                                                                                                                                                \n" +
-
-
-
-        "                                                          @ ;@@@: @                                                                                                                  ;@@@: @+@          \n" +
+                "                                                          @ ;@@@: @                                                                                                                  ;@@@: @+@          \n" +
                 "                                                         @@ ;,#@: @#,                                                                                                             +  @,#@:@@@:'@        \n" +
                 "                                                          @.;@#@  `#, @ ,: @                   @                                                                                @ +@   #@ @`@@ @        \n" +
                 "                                                          #. @@.:@@#';@#'@+@':@@.;@#@ ,@@@@`#@            : @.;'       :+ @            ;@         @'                @       '     @@   @@:              \n" +

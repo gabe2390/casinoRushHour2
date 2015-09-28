@@ -64,4 +64,9 @@ public class GunTest {
     public void givenGunIsInstantiatedThenShoot() {
         assertEquals("Shoot method should return a boolean value, in this case true because the gun chamber has not been spun", true, gun.shoot());
     }
+
+    @Test
+    public void givenPlayerIsNotNullGetPlayer(){
+        assertTrue("Test to make sure getPlayer returns a Player instance", gun.getPlayer() instanceof Player);
+    }
 }

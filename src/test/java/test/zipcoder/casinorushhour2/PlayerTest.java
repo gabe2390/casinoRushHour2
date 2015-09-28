@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PlayerTest {
 
-    Player player1 = new Player ("Rick");
+    Player player1 = new Player("Rick");
 
 
     /**

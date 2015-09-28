@@ -11,12 +11,12 @@ public class Casino {
     private GameSelection currentGame;
     private RussianRoulette russianRoulette;
     private BlackJack blackJack;
-    /* private Poker poker;
-     private FiveCardDraw fiveDraw;
-     private SevenCardStud sevenStud;
-     private SevenCardDraw sevenDraw;
-     private RussianDraw russianDraw;
-   */  private Player player;
+    private Poker poker;
+    private FiveCardDraw fiveDraw;
+    private SevenCardStud sevenStud;
+    private SevenCardDraw sevenDraw;
+    //private RussianDraw russianDraw;
+    private Player player;
 
 
     public Casino() {
@@ -76,12 +76,12 @@ public class Casino {
                 blackJack.playGame();
                 break;
             }
-        /*    case Poker: {
+            case Poker: {
                 poker = new Poker(new Deck(player));
                 poker.playGame();
                 break;
             }
-           case FiveCardDraw: {
+            case FiveCardDraw: {
                 fiveDraw = new FiveCardDraw(new Deck(player));
                 fiveDraw.playGame();
                 break;
@@ -96,7 +96,7 @@ public class Casino {
                 sevenDraw.playGame();
                 break;
             }
-*/
+
             case Russian_Roulette: {
                 russianRoulette = new RussianRoulette(new Gun(player));
                 russianRoulette.playGame();
