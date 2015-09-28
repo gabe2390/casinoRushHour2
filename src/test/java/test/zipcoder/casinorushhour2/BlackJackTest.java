@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class BlackJackTest {
     Player player;
     Dealer DEALER;
-    Deck deckTest;
+    Deck deck;
     BlackJack blackJackTest;
     ArrayList<Card> playerHand = new ArrayList<Card>();
     ArrayList<Card> testHand = new ArrayList<Card>();
@@ -28,10 +28,11 @@ public class BlackJackTest {
     @Before
     public void staging() {
         player = new Player("test");
-        deckTest = new Deck(player);
-        blackJackTest = new BlackJack(deckTest);
+        deck = new Deck(player);
+        blackJackTest = new BlackJack(deck);
         DEALER = new Dealer();
         int currentPot = 0;
+        hands = new HashMap<String, List<Card>>();
 
 
 
@@ -77,8 +78,8 @@ public class BlackJackTest {
 
     @Test
     public void testGiveCardsBack(){
-        testHand2.add(deckTest.getCards().remove(0));
-        testHand2.add(deckTest.getCards().remove(0));
+        testHand2.add(deck.getCards().remove(0));
+        testHand2.add(deck.getCards().remove(0));
         assertEquals(true,blackJackTest.giveCardsBack(testHand2));
     }
 
@@ -100,15 +101,19 @@ public class BlackJackTest {
 
     @Test
     public void testAskForHitYES(){
-
+        blackJackTest.dealCards();
         assertEquals(true, blackJackTest.askForHit(key2));
 
     }
 
     @Test
     public void testAskForHitNO(){
+
         assertEquals(false, blackJackTest.askForHit(key3));
     }
+
+
+
 }
 
 

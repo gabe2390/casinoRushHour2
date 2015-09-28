@@ -60,6 +60,7 @@ public class BlackJack implements CardGame {
                 System.out.println("DEALER HIT!!!!\n");
                 DEALER.addToHand(DEALER.dealCards(1, deck));
                 dealerPrintPoints(DEALER.getHand());
+                waitForDealerHit();
             }
 
             //compares totals, outputs new bank value
@@ -76,6 +77,7 @@ public class BlackJack implements CardGame {
             giveCardsBack(hands.get(player.getName()));
             DEALER.getHand().clear();
             hands.get(player.getName()).clear();
+            currentPot = 0;
             playGame();
         } else {
             System.out.println("Thanks for playing Black Jack, come again soon and give me all of your money!");
@@ -102,19 +104,20 @@ public class BlackJack implements CardGame {
 
 
         System.out.println(player.getName() + "'s hand: " + playerHand + ". " + playerScore + " points.");
-        if ((dealerScore > playerScore && dealerScore <= 21) || playerScore > 21) {
-            System.out.println("DEALER WON! YOU LOST $" + currentPot + " :(\n");
-            return true;
-        } else if ((dealerScore < playerScore && playerScore <= 21)
+         if ((dealerScore < playerScore && playerScore <= 21)
                 || (dealerScore > 21 && playerScore <= 21)) {
 
             player.addToBank(currentPot * 2);
             System.out.println(player.getName() + " WON $" + (currentPot * 2));
-        } else {
+            return true;
+        }
+        else if ((dealerScore > playerScore && dealerScore <= 21) || playerScore > 21) {
+            System.out.println("DEALER WON! YOU LOST $" + currentPot + " :(\n");
+        }
+        else {
             player.addToBank(currentPot);
             System.out.println("It was a tie! Here's your money back...");
         }
-        currentPot = 0;
         return false;
     }
 
@@ -226,7 +229,14 @@ public class BlackJack implements CardGame {
             System.out.println("Your cards: " + cards + " You have " + evaluatePoints(cards) + " points.");
         }
     }
-
+    /**
+     * Pause the flow of the game for 2 seconds to add to "realism"
+     */
+    public void waitForDealerHit() {
+        long currentTime = System.nanoTime();
+        while ((System.nanoTime() - currentTime) <= 1500000000) {
+        }
+    }
     /**
      * Prints the total of the Dealer's hand
      *
