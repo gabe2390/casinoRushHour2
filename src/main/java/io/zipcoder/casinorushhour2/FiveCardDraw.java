@@ -22,16 +22,11 @@ public class FiveCardDraw implements CardGame {
      * Required fields to interact with the player
      */
 
-    //public Deck pokerDeck;
-
     Player player = new Player("Evan");
 
     Deck pokerDeck = new Deck(player);
 
-
     public Player pokerPlayer;
-
-    // public List<Card> cards;
 
     public GameState currentState = NOTRUNNING;
 
@@ -84,7 +79,6 @@ public class FiveCardDraw implements CardGame {
         while (currentState == GameState.RUNNING)
 
         {
-            //playerHand.addAll(DEALER.dealCards(5, pokerDeck));
             dealACardToPlayer();
             dealACardToPlayer();
             dealACardToPlayer();

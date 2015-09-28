@@ -10,9 +10,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by emaron on 9/25/15.
+ * Created by emaron on 9/27/15.
  */
-public class SevenCardStudTest {
+public class FiveCardDrawTest {
 
 
     /**
@@ -21,7 +21,7 @@ public class SevenCardStudTest {
 
     Player playerTest;
     Deck deckTest;
-    SevenCardStud pokerTest;
+    Poker pokerTest;
     ArrayList<Card> playerHand = new ArrayList<Card>();
 
 
@@ -29,7 +29,7 @@ public class SevenCardStudTest {
     public void staging() {
         playerTest = new Player("test");
         deckTest = new Deck(playerTest);
-        pokerTest = new SevenCardStud(deckTest);
+        pokerTest = new Poker(deckTest);
 
 
         Card firstCard = new Card();
@@ -47,20 +47,12 @@ public class SevenCardStudTest {
         Card fifthCard = new Card();
         fifthCard.setName("Seven");
         fifthCard.setSuit(Suit.DIAMONDS);
-        Card sixthCard = new Card();
-        fifthCard.setName("Seven");
-        fifthCard.setSuit(Suit.SPADES);
-        Card seventhCard = new Card();
-        fifthCard.setName("Two");
-        fifthCard.setSuit(Suit.CLUBS);
 
         playerHand.add(firstCard);
         playerHand.add(secondCard);
         playerHand.add(thirdCard);
         playerHand.add(fourthCard);
         playerHand.add(fifthCard);
-        playerHand.add(sixthCard);
-        playerHand.add(seventhCard);
 
     }
 
@@ -72,7 +64,16 @@ public class SevenCardStudTest {
     public void givenHandShouldReturnMapOfSimilarNamedCards() {
 
 
-        assertEquals("Should return a size of five ", 5, pokerTest.checkForSimilarNamedCards(playerHand).size());
+        assertEquals("Should return a size of four ", 4, pokerTest.checkForSimilarNamedCards(playerHand).size());
+    }
+
+    /**
+     * Tests to determine if a player's hand has a flush
+     */
+
+    @Test
+    public void givenHandShouldReturnEnum() {
+        //assertEquals("Should return no flush", Kinds.NOFLUSH, pokerTest.checkForFlushCards(playerHand));
     }
 
     /**
@@ -81,7 +82,7 @@ public class SevenCardStudTest {
 
     @Test
     public void givenASortedMapShouldReturn() {
-        assertEquals("Should return two pair", SevenCardStud.Kinds.TWOPAIRS, pokerTest.InterpretSimilarCardsToPokerHand(pokerTest.checkForSimilarNamedCards(playerHand)));
+        // assertEquals("Should return a pair", Poker.Kinds.PAIR, pokerTest.InterpretSimilarCardsToPokerHand(pokerTest.checkForSimilarNamedCards(playerHand)));
     }
 
     /**
