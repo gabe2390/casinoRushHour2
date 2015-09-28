@@ -9,12 +9,13 @@ import java.util.Scanner;
 
 public class Casino {
     private GameSelection currentGame;
-    private RussianRoulette russian;
+    private RussianRoulette russianRoulette;
     private BlackJack blackJack;
     /* private Poker poker;
      private FiveCardDraw fiveDraw;
      private SevenCardStud sevenStud;
      private SevenCardDraw sevenDraw;
+     private RussianDraw russianDraw;
    */  private Player player;
 
 
@@ -56,6 +57,10 @@ public class Casino {
                 break;
             }
             case 7: {
+                currentGame = GameSelection.RussianDraw;
+                break;
+            }
+            case 8: {
                 currentGame = GameSelection.Leave_Casino;
                 break;
             }
@@ -93,14 +98,18 @@ public class Casino {
             }
 */
             case Russian_Roulette: {
-                russian = new RussianRoulette(new Gun(player));
-                russian.playGame();
+                russianRoulette = new RussianRoulette(new Gun(player));
+                russianRoulette.playGame();
                 break;
             }
+            /*case RussianDraw:{
+                russianDraw = new RussianDraw(new Gun(player));
+                russianDraw.playGame();
+            }*/
             case Leave_Casino: {
                 if (player.getBank() < 0) {
-                    russian = new RussianRoulette(new Gun(player));
-                    russian.playGame();
+                    russianRoulette = new RussianRoulette(new Gun(player));
+                    russianRoulette.playGame();
                     break;
                 }
             }
@@ -173,7 +182,7 @@ public class Casino {
 
         do {
             System.out.println("Select a game:\n1 for Blackjack\n2 for 5 Card Stud\n3 for 5 Card Draw\n4 for 7 Card Stud\n5 for 7 Card Draw" +
-                    "\n6 for Russian Roulette\n7 for Leave Casino.\nI would " +
+                    "\n6 for Russian Roulette\n7 for Russian Draw\n8 for Leave Casino.\nI would " +
                     "advise against entering any other character besides the ones listed.");
             try {
                 x = Integer.parseInt(s.nextLine());
