@@ -6,16 +6,25 @@ import java.util.List;
 
 /**
  * Created by rsparks on 9/24/15.
+ * Dealer class that deals cards, shuffles deck, and returns cards to the deck
  */
 public class Dealer {
 
-   private List<Card> hand;
+    List<Card> hand;
 
+    /**
+     * Constructor for Dealer Class
+     */
     public Dealer() {
         hand = new ArrayList<Card>();
     }
 
-
+    /**
+     * Deals an amount of cards specified by the input of the function
+     * @param deal Tells the dealer how many cards to deal
+     * @param deck Tells the dealer which deck to deal from
+     * @return  Returns an ArrayList of dealt cards
+     */
     public List<Card> dealCards(int deal, Deck deck) {
         List<Card> dealtCards = new ArrayList<Card>();
 
@@ -25,21 +34,27 @@ public class Dealer {
         return dealtCards;
     }
 
-
-
-    public void shuffleDeck(Deck deck){
+    /**
+     * Shuffles the deck
+     * @param deck inputs deck to be shuffled
+     */
+    public void shuffleDeck(Deck deck) {
         Collections.shuffle(deck.getCards());
     }
 
-
-
-    public List<Card> getHand(){
+    /**
+     * Gets the hand of the specified person
+     * @return hand Arraylist of the hand specified
+     */
+    public List<Card> getHand() {
         return hand;
     }
 
-
-
-    public void addToHand(List<Card> cards){
-       hand.addAll(cards);
+    /**
+     * Adds dealt cards to hand
+     * @param cards cards that are to be added to hand
+     */
+    public void addToHand(List<Card> cards) {
+        hand.addAll(cards);
     }
 }

@@ -22,7 +22,7 @@ public class DeckTest {
      */
     @Before
     public void beforeTestsInstantiateDeck() {
-        deck = new Deck(new Player("Rick"));
+        deck = new Deck(new Player("Gabe"));
         deck.init();
     }
 
@@ -51,11 +51,4 @@ public class DeckTest {
         }
     }
 }
-
-
-
-
-
-
-
 
